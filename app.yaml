@@ -1,0 +1,27 @@
+runtime: php55
+api_version: 1
+
+handlers:
+- url: /assets/(.*\.css)
+  mime_type: text/css
+  static_files: assets/\1
+  upload: assets/(.*\.css)
+  
+- url: /assets/(.*\.js)
+  mime_type: text/javascript
+  static_files: assets/\1
+  upload: assets/(.*\.js)
+  
+- url: /(.+\.php)$
+  script: \1
+  
+- url: /(.+\.html)$
+  script: \1
+  
+- url: /images/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: images/\1
+  upload: images/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  
+- url: /.*
+  script: index.html
+  
