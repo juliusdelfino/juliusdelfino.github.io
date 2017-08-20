@@ -34,8 +34,8 @@
                 <td>
                     <span id="am-pm"></span>
                 </td>
-                <td>
-                    <span id="time-now"></span>
+                <td id="time-now">
+                    <span id="hour-now"></span><span id="colon-separator">:</span><span id="minute-now"></span>
                 </td>
                 <td>
                     <span id="seconds-now"></span>
@@ -59,14 +59,18 @@
     </body>
     <script>
 
+        updateTime();
         setInterval(updateTime, 1000);
 
         function updateTime() {
             var time = moment(new Date());
-            $("#time-now").text(time.format('hh:mm'));
+            $("#hour-now").text(time.format('hh'));
+            $("#minute-now").text(time.format('mm'));
             $("#date-now").text(time.format('dddd -- MMM DD, YYYY'));
             $("#am-pm").text(time.format('A'));
-            $("#seconds-now").text(time.format('ss'));
+            var seconds = time.format('ss');
+            $("#seconds-now").text(seconds);
+            $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
         }
     </script>
 </html>
