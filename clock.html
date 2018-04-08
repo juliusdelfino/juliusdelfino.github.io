@@ -6,7 +6,6 @@
         <script src="assets/moment.min.js"></script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
         <meta charset="utf-8">
     </head>
     <style class="cp-pen-styles">
@@ -18,7 +17,7 @@
         }
 
         #time-now {
-            font-size: 30vw;
+            font-size: 20vw;
             padding-bottom: 0;
             margin-bottom: 0;
         }
@@ -26,6 +25,10 @@
         #date-now {
             font-size: 4.5vw;
             text-transform: uppercase
+        }
+
+        #bus-wt {
+            font-size: 2vw
         }
 
     </style>
@@ -39,6 +42,13 @@
             <tr>
                 <td></td>
                 <td id="date-now" style="text-align: center"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table id="bus-wt" style="width: 100%">
+                    </table>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -62,6 +72,9 @@
         updateTime();
         setInterval(updateTime, 1000);
 
+        updateBusWt();
+        setInterval(updateBusWt, 15000);
+
         function updateTime() {
             var time = moment(new Date());
             $("#hour-now").text(time.format('hh'));
@@ -71,6 +84,29 @@
             var seconds = time.format('ss');
             $("#seconds-now").text(seconds);
             $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
+        }
+
+        function updateBusWt() {
+
+            $.get( "https://arrivelah.herokuapp.com/?id=14039", function( data ) {
+
+                $('#bus-wt').html("");
+
+                    for (var idx in data.services) {
+                      var busInfo = data.services[idx];
+                       $('#bus-wt').append('<tr><td>' + busInfo.no + '</td><td>'
+                            + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
+                            + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td><td>'
+                            + toReadableWaitingTime(busInfo.next3.duration_ms) + '</td></tr>');
+                }
+            });
+
+        }
+
+        function toReadableWaitingTime(msTime) {
+
+            time = Math.floor(msTime / 60000)
+            return time > 0 ? time + " min" : "Arr";
         }
 
         function closeWindow() {
