@@ -24,7 +24,7 @@
         text-transform: uppercase
     }
     #bus-wt {
-        font-size: 8vw;
+        font-size: 7vw;
         color: green
     }
     .bus-stop-name {
@@ -47,7 +47,7 @@
         <tr>
             <td></td>
             <td>
-                <div class="bus-stop-name">Opp St Teresa's Convent</div>
+                <div class="bus-stop-name">Opp St Teresa's Convent <button id="display-mode-btn">Display Mode</button></div>
                 <table id="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
@@ -62,10 +62,29 @@
     </table>
 </body>
 <script>
+$(function(){
+        var DISP_MINUTES = 0;
+        var DISP_TIME = 1;
+        var DISP_MILLIS = 2;
+        var displayMode = DISP_MINUTES;
+        var dataCache = null;
+        
+        initialize();
         updateTime();
         setInterval(updateTime, 1000);
         updateBusWt();
         setInterval(updateBusWt, 15000);
+        
+        function initialize() {
+            $('#display-mode-btn').click(function(){
+                displayMode++;
+                if (displayMode > DISP_MILLIS) {
+                    displayMode = DISP_MINUTES;
+                }
+                changeView(dataCache);
+            });
+        }
+        
         function updateTime() {
             var time = moment(new Date());
             $("#hour-now").text(time.format('hh'));
@@ -78,18 +97,30 @@
         }
         function updateBusWt() {
             $.get( "https://arrivelah.herokuapp.com/?id=14039", function( data ) {
-                $('#bus-wt').html("");
-                    for (var idx in data.services) {
-                      var busInfo = data.services[idx];
-                       $('#bus-wt').append('<tr><td>' + busInfo.no + '</td><td>'
-                            + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
-                            + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td><td>'
-                            + toReadableWaitingTime(busInfo.next3.duration_ms) + '</td></tr>');
-                }
+                changeView(data);
+                dataCache = data;
             });
         }
+        
+        function changeView(data) {
+            $('#bus-wt').html("");
+                for (var idx in data.services) {
+                  var busInfo = data.services[idx];
+                   $('#bus-wt').append('<tr><td>' + busInfo.no + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next3.duration_ms) + '</td></tr>');
+            }
+        }
+        
         function toReadableWaitingTime(msTime) {
             if (msTime == null) return null;
+            if (displayMode == DISP_MILLIS) return "<span style='font-size: 3vw'>" + msTime + "</span>";
+            if (displayMode == DISP_TIME) {
+                var now = new Date();
+                var nowMillis = now.getTime() + msTime - (now.getTimezoneOffset() * 60000);    
+                return "<span style='font-size: 4vw'>" + new Date(nowMillis).toISOString().slice(-13, -8) + "</span>";
+            }
             time = Math.floor(msTime / 60000)
             return time > 0 ? time + "<span style='font-size: 3vw'>min</span>" : "Arr";
         }
@@ -97,6 +128,7 @@
             if (confirm("Close Window?")) {
                 window.close();
             }
-        }
+        } 
+});
 </script>
 </html>
