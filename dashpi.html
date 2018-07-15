@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td>
-                <div class="bus-stop-name">Opp St Teresa's Convent <button id="display-mode-btn">Display Mode</button></div>
+                <div class="bus-stop-name">Aft Telok Blangah St 32 <button id="display-mode-btn">Display Mode</button></div>
                 <table id="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
@@ -92,7 +92,7 @@ $(function(){
             $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
         }
         function updateBusWt() {
-            $.get( "https://arrivelah.herokuapp.com/?id=14039", function( data ) {
+            $.get( "https://arrivelah.herokuapp.com/?id=14331", function( data ) {
                 changeView(data);
                 dataCache = data;
             });
