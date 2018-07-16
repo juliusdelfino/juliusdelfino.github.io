@@ -28,7 +28,8 @@
         color: green
     }
     .bus-stop-name {
-        font-weight: bold
+        font-weight: bold;
+        font-size: 3vw;
     }
 </style>
 <body>
@@ -47,6 +48,12 @@
             <td>
                 <div class="bus-stop-name">Aft Telok Blangah St 32 <button id="display-mode-btn">Display Mode</button></div>
                 <table id="bus-wt" style="width: 100%"></table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bus-stop-name">Bef Telok Blangah St 32 <button id="display-mode-btn-2">Display Mode</button></div>
+                <table id="bus-wt-2" style="width: 100%"></table>
             </td>
         </tr>
         <tr>
@@ -93,16 +100,20 @@ $(function(){
         }
         function updateBusWt() {
             $.get( "https://arrivelah.herokuapp.com/?id=14331", function( data ) {
-                changeView(data);
+                changeView('#bus-wt', data);
+                dataCache = data;
+            });
+            $.get( "https://arrivelah.herokuapp.com/?id=14339", function( data ) {
+                changeView('#bus-wt-2', data);
                 dataCache = data;
             });
         }
         
-        function changeView(data) {
-            $('#bus-wt').html("");
+        function changeView(bus_wt_id, data) {
+            $(bus_wt_id).html("");
                 for (var idx in data.services) {
                   var busInfo = data.services[idx];
-                   $('#bus-wt').append('<tr><td>' + busInfo.no + '</td><td>'
+                   $(bus_wt_id).append('<tr><td>' + busInfo.no + '</td><td>'
                         + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
                         + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td><td>'
                         + toReadableWaitingTime(busInfo.next3.duration_ms) + '</td></tr>');
