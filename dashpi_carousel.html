@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clock</title>
+    <script src="assets/jquery.js"></script>
+    <script src="assets/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+</head>
+<style class="cp-pen-styles">
+    @import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
+    body {
+        font-family: "Arial Black", Gadget, sans-serif;
+        background-color: black;
+        color: white;
+    }
+    #time-now {
+        font-size: 4vw;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    #date-now {
+        font-size: 4vw;
+        text-transform: uppercase
+    }
+    .bus-wt {
+        font-size: 7vw;
+        color: green
+    }
+    .bus-wt tr {
+        line-height: 1;
+    }
+    .bus-stop-name {
+        font-weight: bold;
+        font-size: 3vw;
+    }
+</style>
+<body>
+    <table class="container-fluid">
+        <tr>
+            <td style="text-align: center">
+                <span id="date-now"></span>
+                <span id="time-now">--
+                    <span id="hour-now"></span><span id="colon-separator">:</span><span id="minute-now"></span>
+                    <span id="colon-separator">:</span><span id="seconds-now"></span>
+                    <span id="am-pm"></span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        <div class="bus-stop-name">Opp Blk 70B <button id="display-mode-btn" class="btn btn-sm">Display Mode</button></div>
+                                        <table id="bus-wt" class="bus-wt" style="width: 100%"></table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="bus-stop-name">Blk 70A <button id="display-mode-btn-2" class="btn btn-sm">Display Mode</button></div>
+                                        <table id="bus-wt-2" class="bus-wt" style="width: 100%"></table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="javascript:location.reload();">refresh</a>
+                                        <a href="javascript:window.open('','_self').close();">close</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view" style="background-image: url('https://i1.wp.com/en.blog.kkday.com/wp-content/uploads/kwinter.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+                                <div class="container">
+                                        <div class="col-md-12 mb-4 white-text text-center">
+                                            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s">
+                                                <p style="font-size: 150px; color: white; text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;"><span id="korea-countdown"></span> before SOUTH KOREA trip!</p></h1>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view" style="background-image: url('http://s1.picswalls.com/wallpapers/2017/12/11/awesome-christmas-wallpaper_104051383_314.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+                                <div class="container">
+                                    <div class="col-md-12 mb-4 white-text text-center">
+                                        <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s">
+                                            <p style="font-size: 150px; color: white; text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;"><span id="christmas-countdown"></span> before CHRISTMAS!</p></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+<script>
+$(function(){
+        var DISP_MINUTES = 0;
+        var DISP_TIME = 1;
+        var DISP_MILLIS = 2;
+        var displayMode = DISP_MINUTES;
+        var dataCache = null;
+
+        initialize();
+        updateTime();
+        setInterval(updateTime, 1000);
+        updateBusWt();
+        setInterval(updateBusWt, 15000);
+        computeCountdowns();
+
+        function initialize() {
+            $('#display-mode-btn').click(function(){
+                displayMode++;
+                if (displayMode > DISP_MILLIS) {
+                    displayMode = DISP_MINUTES;
+                }
+                changeView(dataCache);
+            });
+        }
+
+        function computeCountdowns() {
+
+            var koreaDate = new Date("Dec 5, 2019 12:00:00").getTime();
+            var christmasDate = new Date("Dec 25, 2019 12:00:00").getTime();
+            var today = new Date().getTime();
+            var koreaCountdown = Math.floor((koreaDate - today) / (1000 * 60 * 60 * 24));
+            var christmasCountdown = Math.floor((christmasDate - today) / (1000 * 60 * 60 * 24));
+            $("#korea-countdown").text(koreaCountdown + (koreaCountdown == 1 ? " DAY" : " DAYS"));
+            $("#christmas-countdown").text(christmasCountdown + (christmasCountdown == 1 ? " DAY" : " DAYS"));
+
+        }
+
+        function updateTime() {
+            var time = moment(new Date());
+            $("#hour-now").text(time.format('hh'));
+            $("#minute-now").text(time.format('mm'));
+            $("#date-now").text(time.format('dddd -- MMM DD, YYYY'));
+            $("#am-pm").text(time.format('A'));
+            var seconds = time.format('ss');
+            $("#seconds-now").text(seconds);
+            $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
+        }
+        function updateBusWt() {
+            $.get( "https://sagabus.herokuapp.com/bus?id=14331", function( data ) {
+                changeView('#bus-wt', data);
+                dataCache = data;
+            });
+            $.get( "https://sagabus.herokuapp.com/bus?id=14339", function( data ) {
+                changeView('#bus-wt-2', data);
+                dataCache = data;
+            });
+        }
+
+        function changeView(bus_wt_id, data) {
+            $(bus_wt_id).html("");
+                for (var idx in data.services) {
+                  var busInfo = data.services[idx];
+                   $(bus_wt_id).append('<tr><td>' + busInfo.no + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td><td>'
+                        + toReadableWaitingTime(busInfo.next3.duration_ms) + '</td></tr>');
+            }
+        }
+
+        function toReadableWaitingTime(msTime) {
+            if (msTime == null) return null;
+            if (displayMode == DISP_MILLIS) return "<span style='font-size: 3vw'>" + msTime + "</span>";
+            if (displayMode == DISP_TIME) {
+                var now = new Date();
+                var nowMillis = now.getTime() + msTime - (now.getTimezoneOffset() * 60000);
+                return "<span style='font-size: 4vw'>" + new Date(nowMillis).toISOString().slice(-13, -8) + "</span>";
+            }
+            time = Math.floor(msTime / 60000)
+            return time > 0 ? time + "<span style='font-size: 3vw'>min</span>" : "Arr";
+        }
+        function closeWindow() {
+            if (confirm("Close Window?")) {
+                window.close();
+            }
+        }
+});
+</script>
+</html>
