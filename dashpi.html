@@ -46,13 +46,13 @@
         </tr>
         <tr>
             <td>
-                <div class="bus-stop-name">Aft Telok Blangah St 32 <button id="display-mode-btn">Display Mode</button></div>
+                <div class="bus-stop-name">Opp Blk 70B <button id="display-mode-btn">Display Mode</button></div>
                 <table id="bus-wt" class="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
         <tr>
             <td>
-                <div class="bus-stop-name">Bef Telok Blangah St 32 <button id="display-mode-btn-2">Display Mode</button></div>
+                <div class="bus-stop-name">Blk 70A <button id="display-mode-btn-2">Display Mode</button></div>
                 <table id="bus-wt-2" class="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
@@ -99,11 +99,11 @@ $(function(){
             $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
         }
         function updateBusWt() {
-            $.get( "https://arrivelah.herokuapp.com/?id=14331", function( data ) {
+            $.get( "https://sagabus.herokuapp.com/bus?id=14331", function( data ) {
                 changeView('#bus-wt', data);
                 dataCache = data;
             });
-            $.get( "https://arrivelah.herokuapp.com/?id=14339", function( data ) {
+            $.get( "https://sagabus.herokuapp.com/bus?id=14339", function( data ) {
                 changeView('#bus-wt-2', data);
                 dataCache = data;
             });
