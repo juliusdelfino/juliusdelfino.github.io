@@ -78,6 +78,10 @@
       letter-spacing: -.05rem;
     }
 
+    .featurette .photo img {
+        width: 450px;
+    }
+
 
     /* RESPONSIVE CSS
     -------------------------------------------------- */
@@ -118,15 +122,19 @@
       @media (max-width: 767px) {
 
             .carousel-item .main-title {
-                font-size: 140px; line-height: 1px; font-weight: bold
+                font-size: 100px; line-height: 1px; font-weight: bold
             }
 
             .carousel-item .sub-title {
-                font-size: 20px; letter-spacing: 45px; font-weight: bold
+                font-size: 20px; letter-spacing: 28px; font-weight: bold
             }
 
             .carousel-item .sub-text {
                 letter-spacing: 10px; font-weight: bold
+            }
+
+            .featurette .photo img {
+                width: 100%;
             }
       }
 
