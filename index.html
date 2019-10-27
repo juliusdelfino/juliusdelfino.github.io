@@ -1,114 +1,158 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Clock</title>
-        <script src="assets/jquery.js"></script>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-        <meta charset="utf-8">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-4019314381981428",
-            enable_page_level_ads: true
-          });
-        </script>
-    </head>
-    <style class="cp-pen-styles">
-        @import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
-        body {
-            background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #f2efd9 100%);
-            font-family: Arial, Helvetica, sans-serif;
-            color: grey;
-            text-align: center;
-        }
-
-        .app-item {
-            padding: 20px;
-            text-align: center;
-            color: grey;
-            text-transform: uppercase;
-        }
-        
-        
-    </style>
-    <body>
-        <h1>Hello! Welcome to our humble hub.</h1>
-        <h3>Please select from our services and enjoy!</h3>
-        <hr/>
-        <div>
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- simple-ad -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4019314381981428"
-                 data-ad-slot="2679180378"
-                 data-ad-format="auto"></ins>
-            <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+<head>
+    <title>Clock</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/index2.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">JUJU Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Projects</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-        <table style="width: 786px">
-            <tr style="overflow: scroll">
-                <td class="app-item">
-                    <a href="http://pseview.jdelfino.com/">
-                    <svg width="190" height="190" xmlns="http://www.w3.org/2000/svg">
-                       <image x="0" y="0" height="190" width="190"  xlink:href="images/stocks.svg" />
-                    </svg>
-                    <br/>
-                    <span>PSE Stocks</span>
-                    </a>
-                </td>
-                <td class="app-item">
-                    <a href="http://lotto.jdelfino.com/">
-                    <svg width="190" height="190" xmlns="http://www.w3.org/2000/svg">
-                       <image x="0" y="0" height="190" width="190"  xlink:href="images/store.svg" />
-                    </svg>
-                    <br/>
-                    <span>Lotto Analytics</span><br/>
-                    </a>
-                </td>
-                <td class="app-item">
-                    <svg width="190" height="190" xmlns="http://www.w3.org/2000/svg">
-                       <image x="0" y="0" height="190" width="190"  xlink:href="images/travel.svg" />
-                    </svg>
-                    <br/>
-                    <span>Travel Blog</span><br/>
-                    <span style="font-style: italic; color: red">Coming Soon!</span>
-                </td>
-                <td class="app-item">
-                    <svg width="190" height="190" xmlns="http://www.w3.org/2000/svg">
-                       <image x="0" y="0" height="190" width="190"  xlink:href="images/work.svg" />
-                    </svg>
-                    <br/>
-                    <span>Programming</span><br/>
-                    <span style="font-style: italic; color: red">Coming Soon!</span>
-                </td>
-                <td class="app-item">
-                    <a href="http://www.jdelfino.com/clock.html">
-                        <svg width="190" height="190" xmlns="http://www.w3.org/2000/svg">
-                           <image x="0" y="0" height="190" width="190"  xlink:href="images/clock.svg" />
-                        </svg>
-                        <br/>
-                        <span>Kiosk Clock</span>
-                    </a>
-                </td>
-            </tr>
-            <tr><td></td>
-                <td id="date-now" style="text-align: center"></td></tr>
-        </table>
-        <hr/>
-        <span>JDelfino Services, Copyright 2017</span>
-    </body>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-105814552-1', 'auto');
-      ga('send', 'pageview');
-    
-    </script>
+    </nav>
+</header>
+
+<main role="main">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background: lightblue url('images/marina_barrage.gif') no-repeat left; background-size: cover">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <span class="main-title">JUJU</span><br/>
+                        <span class="sub-title">PROJECT</span><br/>
+                        <p class="sub-text">Travel &middot; Music &middot; Coding</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+                    <image x="0" y="0" height="140" width="140"  xlink:href="images/stocks.svg" />
+                </svg>
+                <h2>PSE Viewer</h2>
+                <p>Monitor your Philippine stocks easily using this convenient tool. Sort stocks, save favorites and view charts.</p>
+                <p><a class="btn btn-secondary" href="https://psei.jdelfino.com/" role="button">View website &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+                    <image x="0" y="0" height="140" width="140"  xlink:href="images/work.svg" />
+                </svg>
+                <h2>Lotto Analytics</h2>
+                <p>Search lotto results quickly. Browse all available data and use more granular search filters.</p>
+                <p><a class="btn btn-secondary" href="https://lotto.jdelfino.com/" role="button">View website &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+                    <image x="0" y="0" height="140" width="140"  xlink:href="images/clock.svg" />
+                </svg>
+                <h2>Bus Stop Kiosk</h2>
+                <p>A kiosk to display waiting times of buses in nearby stops. Projected to our TV for personal consumption.</p>
+                <p><a class="btn btn-secondary" href="https://jdelfino.com/dashpi.html" role="button">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading"><span class="text-muted">Garmin - </span> SG Bus Times</h2>
+                <p class="lead">Frequent bus riders in Singapore, you can now search for nearby buses within 350 meters and save them on your watch!
+                    Search for nearby bus stops, and view ALL available buses and their arrival times by scrolling up and down, and select which ones to favorite.</p>
+                <p><a class="btn btn-secondary" href="https://apps.garmin.com/en-US/apps/189f756c-78e5-4878-b1da-c734ef90153d" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-5">
+                <img src="images/bus-sg-garmin-cover-photo7.png" width="450" />
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">Database Viewer</h2>
+                <p class="lead">The most lightweight, high-speed, highly configurable, web-based database client using Java's Spark Web, Velocity's HTML templating, and the Ruby on Rails framework concepts. It supports virtually all types of databases, including MySQL, PostgreSQL, Microsoft SQL, Phoenix, Ignite Cache, and Presto, among others.</p>
+                <p><a class="btn btn-secondary" href="https://github.com/juliodelfino/db_ui" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="images/db-info-page.png" width="450" />
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Electric Drum Set.<br/><span class="text-muted"> For Rent (Singapore).</span></h2>
+                <p class="lead">Yamaha DTX452K electric drumkit for rent<br/>
+                    $40 per week<br/>
+                    Pick up at Telok Blangah Heights</p>
+                <p><a class="btn btn-secondary" href="https://sg.carousell.com/p/electric-drum-set-4-rent-186203583" role="button">View details &raquo;</a></p>
+
+            </div>
+            <div class="col-md-5">
+                <img src="images/electric_drum_set_4_rent.jpg" width="450" />
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2019 Juju Project &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+</main>
+</body>
 </html>
