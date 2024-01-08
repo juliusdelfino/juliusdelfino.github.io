@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clock</title>
+    <script src="assets/jquery.js"></script>
+    <script src="assets/moment.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+</head>
+<style class="cp-pen-styles">
+    @font-face {
+		font-family: 'digital-7';
+		src: url('/assets/font/digital-7.ttf');
+	}
+	
+    @import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
+    body {
+        font-family: "Arial Black", Gadget, sans-serif;
+        background-color: black;
+        color: white;
+    }
+    #time-now {
+		font-family: 'digital-7', sans-serif;
+        font-size: 35vw;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    #seconds-now {
+		font-family: 'digital-7', sans-serif;
+        font-size: 8vw;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    #date-now {
+		font-family: 'digital-7', sans-serif;
+        font-size: 8.5vw;
+        text-transform: uppercase
+    }
+    #colon-separator, #am-pm {
+		font-family: 'digital-7', sans-serif;
+        font-size: 15vw;
+    }
+    .bus-wt {
+		font-family: 'digital-7', sans-serif;
+        font-size: 6vw;
+        color: #21eb13;
+    }
+    .bus-wt-large {
+		font-family: 'digital-7', sans-serif;
+        font-size: 16vw;
+        color: #21eb13;
+    }
+	.bus-id {	
+        font-size: 6vw;
+	}
+	.bus-id-large {
+		padding-bottom: 10px;
+	}
+    .bus-stop-name {
+        font-weight: bold;
+        font-size: 5vw;
+    }
+    .bus-stop-name2 {
+        font-size: 4vw;
+    }
+	.time-unit {
+		font-size: 4vw
+	}
+	#display-babystats {
+		font-family: 'digital-7', sans-serif;
+	}
+	#display-weather {
+		font-family: 'digital-7', sans-serif;
+        font-size: 7vw;
+	}
+	.stats-label {
+		font-size: 9vw;
+	}	
+	#last-feeding-time-ago, #baby-age {
+		font-size: 19vw;
+	}
+    #right-button {
+        position: absolute;
+        float: right;
+        width: 20vw;
+        height: 100%;
+        border: 1px solid #555;
+        z-index: 10;
+        right: 0;
+        
+    }
+    #buttons {
+        position: relative;
+    }
+</style>
+<body>
+    <div id="buttons">
+        <div id="right-button" />
+    </div>
+    <table id="display-clock" class="display-0">
+        <tr>
+            <td style="text-align: center" colspan="2">
+                <span id="date-now"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span id="time-now">
+					<span id="hour-now"></span><span id="colon-separator">:</span><span id="minute-now"></span>
+                </span>
+            </td>
+			<td>
+				<span id="seconds-now"></span><br/><span id="am-pm"></span>
+			</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="javascript:location.reload();">refresh</a>
+                <a href="javascript:window.open('','_self').close();">close</a>
+            </td>
+        </tr>
+    </table>
+	<table id="display-babystats" class="display-1">
+        <tr>
+            <td>
+				<span class="stats-label">Cyrus' age: </span><br />
+                <span id="baby-age"></span><br /><br />
+				<span class="stats-label">Last feeding time: </span><br />
+                <span id="last-feeding-time-ago"></span>
+            </td>
+        </tr>
+    </table>
+	<table id="display-bustimes" class="display-2">
+        <tr><td colspan="2">
+            <div class="bus-stop-name">[14499] Telok Blangah Mkt/FC</div>
+        </td></tr>
+        <tr>
+            <td style="width: 50%; border-right: solid 1px white; vertical-align: top">
+                <table id="bus-wt-14499" class="bus-wt-large" style="width: 100%"></table>
+            </td>
+        </tr>
+        <tr><td colspan="2">
+            <div class="bus-stop-name">[14491] Opp Telok Blangah Mkt/FC</div>
+        </td></tr>
+        <tr>
+            <td style="width: 50%; border-right: solid 1px white; vertical-align: top">
+                <table id="bus-wt-14491" class="bus-wt-large" style="width: 100%"></table>
+            </td>
+        </tr>
+    </table>
+	<table id="display-weather" class="display-3">
+        <tr>
+            <td>Weather Forecast (2-HR): </td><td id="weather-forecast"></td>
+        </tr>
+        <tr>
+            <td>Temperature: </td><td><span id="temperature"></span>°C</td>
+        </tr>
+        <tr>
+            <td>Relative Humidity: </td><td id="relative-humidity"></td>
+        </tr>
+        <tr>
+            <td>Rainfall: </td><td id="rainfall"></td>
+        </tr>
+    </table>
+</body>
+<script>
+$(function(){
+        var DISP_MINUTES = 0;
+        var DISP_TIME = 1;
+        var DISP_MILLIS = 2;
+        var displayMode = DISP_MINUTES;
+        var dataCache = null;
+		var babyStats = null;
+        var displayIdx = 0;
+        
+        initialize();
+        updateTime();
+        setInterval(updateTime, 1000);
+        updateBusWt();
+        setInterval(updateBusWt, 15000);
+        updateBabyStats();
+        setInterval(updateBabyStats, 60000);
+        updateWeather();
+        setInterval(updateWeather, 60000);
+        addNextSlideButtonEvent();
+        
+        function initialize() {
+            $("#display-clock").css("display", "block");
+            $("#display-babystats").css("display", "none");
+            $("#display-bustimes").css("display", "none");
+            $("#display-weather").css("display", "none");
+            $('#display-mode-btn').click(function(){
+                displayMode++;
+                if (displayMode > DISP_MILLIS) {
+                    displayMode = DISP_MINUTES;
+                }
+                changeView(dataCache);
+            });
+        }
+        
+        function updateTime() {
+            var time = moment(new Date());
+            $("#hour-now").text(time.format('hh'));
+            $("#minute-now").text(time.format('mm'));
+            $("#date-now").text(time.format('dddd - MMM DD, YYYY'));
+            $("#am-pm").text(time.format('A'));
+            var seconds = time.format('ss');
+            $("#seconds-now").text(seconds);
+            $("#colon-separator").css("visibility", (seconds % 2 ? "visible" : "hidden"));
+			
+			var hrMin = time.format('HH') * 100 + time.format('mm') * 1;
+			let evening0830 = 2030, morning0630 = 700, afternoon1245 = 1245, afternoon3pm = 1500;
+			$("#display-clock").css("color", hrMin >= evening0830 || hrMin < morning0630  || (hrMin >= afternoon1245 && hrMin < afternoon3pm)? "red" : "#21eb13" );
+        }
+		
+        function updateBusWt() {
+            $.get( "https://sagabus.herokuapp.com/bus?id=14499", function( data ) {
+                changeViewBusStopLarge('#bus-wt-14499', data);
+                dataCache = data;
+            });
+            $.get( "https://sagabus.herokuapp.com/bus?id=14491", function( data ) {
+                changeViewBusStopLarge('#bus-wt-14491', data);
+                dataCache = data;
+            });
+        }
+		
+        function updateBabyStats() {
+            $.get( "http://cyrus.jdelfino.com/latest_stats_json", function( data ) {
+                babyStats = JSON.parse(data);
+				$("#baby-age").text(babyStats.ageInMonths + " months");
+				$("#last-feeding-time-ago").text(babyStats.lastFeedingTimeAgo);
+				
+            });
+        }
+              
+        function changeViewBusStopLarge(bus_wt_id, data) {
+            $(bus_wt_id).html("");
+            $(bus_wt_id + "-2").html("");
+            for (var idx in data.services) {
+              var busInfo = data.services[idx];
+              var bus_wt_id_large = (idx < 4) ? bus_wt_id : bus_wt_id + "-2";
+               $(bus_wt_id_large).append('<tr><td class="bus-id-large">' + busInfo.no + '</td><td>'
+                    + toReadableWaitingTime(busInfo.next.duration_ms) + '</td><td>'
+                    + toReadableWaitingTime(busInfo.next2.duration_ms) + '</td></tr>');
+            }
+        }
+        
+        function toReadableWaitingTime(msTime) {
+            if (msTime == null) return null;
+            if (displayMode == DISP_MILLIS) return "<span style='font-size: 3vw'>" + msTime + "</span>";
+            if (displayMode == DISP_TIME) {
+                var now = new Date();
+                var nowMillis = now.getTime() + msTime - (now.getTimezoneOffset() * 60000);    
+                return "<span style='font-size: 4vw'>" + new Date(nowMillis).toISOString().slice(-13, -8) + "</span>";
+            }
+            time = Math.floor(msTime / 60000)
+            return time > 0 ? time + "<span class='time-unit'>min</span>" : "Arr";
+        }
+        function closeWindow() {
+            if (confirm("Close Window?")) {
+                window.close();
+            }
+        }
+        function addNextSlideButtonEvent() {
+            $("#right-button").click(function(){
+                $(".display-" + displayIdx).css("display", "none");
+                displayIdx = displayIdx == 3 ? 0 : (displayIdx + 1);
+                $(".display-" + displayIdx).css("display", "block");
+            }).on('mousedown', function() {
+                $(this).css("background-color", "#555");
+            }).on('mouseup mouseleave', function() {
+                $(this).css("background-color", "transparent");
+            });
+        }
+        function updateWeather() {
+            $.get( "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast", function( data ) {
+				console.log("weather forecast");
+				console.log(data);
+                $("#weather-forecast").html(data.items[0].forecasts[5].forecast); //forecasts[5] is Bukit Merah
+            });
+            $.get( "https://api.data.gov.sg/v1/environment/air-temperature", function( data ) {
+				console.log("air temp");
+				console.log(data);
+                $("#temperature").html(data.items[0].readings[1].value);
+            });
+            $.get( "https://api.data.gov.sg/v1/environment/relative-humidity", function( data ) {
+				console.log("humidity");
+				console.log(data);
+                $("#relative-humidity").html(data.items[0].readings[1].value);
+            });
+            $.get( "https://api.data.gov.sg/v1/environment/rainfall", function( data ) {
+				console.log("rainfall");
+				console.log(data);
+                $("#rainfall").html(data.items[0].readings[47].value);
+            });
+        }
+});
+</script>
+</html>
