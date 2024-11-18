@@ -43,7 +43,7 @@
     }
     .bus-wt {
 		font-family: 'digital-7', sans-serif;
-        font-size: 6vw;
+        font-size: 7vw;
         color: #21eb13;
     }
     .bus-wt-large {
@@ -133,19 +133,19 @@
     </table>
 	<table id="display-bustimes" class="display-2">
         <tr><td colspan="2">
-            <div class="bus-stop-name">[14499] Telok Blangah Mkt/FC</div>
+            <div class="bus-stop-name">[609] Leystraße</div>
         </td></tr>
         <tr>
             <td style="width: 50%; border-right: solid 1px white; vertical-align: top">
-                <table id="bus-wt-14499" class="bus-wt-large" style="width: 100%"></table>
+                <table id="bus-wt-14499" class="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
         <tr><td colspan="2">
-            <div class="bus-stop-name">[14491] Opp Telok Blangah Mkt/FC</div>
+            <div class="bus-stop-name">[590] Friedrich-Engels-Platz</div>
         </td></tr>
         <tr>
             <td style="width: 50%; border-right: solid 1px white; vertical-align: top">
-                <table id="bus-wt-14491" class="bus-wt-large" style="width: 100%"></table>
+                <table id="bus-wt-14491" class="bus-wt" style="width: 100%"></table>
             </td>
         </tr>
     </table>
@@ -215,12 +215,13 @@ $(function(){
         }
 		
         function updateBusWt() {
-            $.get( "https://sagabus.herokuapp.com/bus?id=14499", function( data ) {
+            $.get( "https://sagabus.herokuapp.com/bus?id=609", function( data ) {
                 changeViewBusStopLarge('#bus-wt-14499', data);
                 dataCache = data;
             });
-            $.get( "https://sagabus.herokuapp.com/bus?id=14491", function( data ) {
-                changeViewBusStopLarge('#bus-wt-14491', data);
+            $.get( "https://sagabus.herokuapp.com/bus?id=590", function( data ) {
+                let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
+                changeViewBusStopLarge('#bus-wt-14491', data2);
                 dataCache = data;
             });
         }
