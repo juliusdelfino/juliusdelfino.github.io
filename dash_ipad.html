@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPad Kiosk Layout</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Arial Black", Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-areas:
+                "clock clock buses"
+                "weather weather buses";
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 2fr 1fr;
+            gap: 15px;
+            width: 90vw;
+            height: 90vh;
+        }
+
+        .widget {
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .clock {
+            grid-area: clock;
+            font-size: 18rem;
+            text-align: center;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #e0f7fa;
+            background-color: #2b2b2b;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clock-time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock-time span {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #1c1c1c;
+        }
+
+        .seconds {
+            font-size: 4rem;
+            margin-left: 10px;
+            color: #00bcd4;
+        }
+
+        .date {
+            font-size: 3rem;
+            margin-top: 20px;
+            color: #bbbbbb;
+        }
+
+        .weather {
+            grid-area: weather;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .weather-forecast {
+            text-align: center;
+            display: inline-block;
+            padding: 0 30px;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .weather-forecast .hour {
+            font-size: 3.5rem;
+            color: #00bcd4;
+        }
+
+        .weather-forecast-now {
+            font-size: 5rem;
+        }
+
+        .weather-forecast div {
+            font-size: 4rem;
+        }
+
+        .bus-stop {
+            font-size: 2.5rem;
+<!--            color: #e30014;-->
+        }
+
+        .bus-stop-splitter {
+            margin: 10px 0px
+        }
+
+        .buses {
+            grid-area: buses;
+            font-size: 5rem;
+            overflow-y: auto;
+            text-align: left;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .bus {
+            font-size: 3rem;
+        }
+
+        .bus-number {
+            font-size: 5rem;
+            padding: 0px 20px;
+            border-radius: 8px;
+            background-color: #1c60a7;
+        }
+
+        .buses h3 {
+            font-size: 3rem;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+
+        .buses ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .buses ul li {
+            margin-bottom: 10px;
+        }
+
+        .bus-time {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #00bcd4;
+        }
+
+        /* Responsive scaling for the iPad */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+                grid-template-areas:
+                    "clock clock"
+                    "weather buses";
+            }
+
+            .clock {
+                font-size: 10rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Clock -->
+    <div class="widget clock">
+        <div class="clock-time">
+            <span id="hours">00</span>:<span id="minutes">00</span>
+            <span class="seconds" id="seconds">00</span>
+        </div>
+        <div class="date" id="date">Tuesday, Nov 19, 2024</div>
+    </div>
+
+    <!-- Weather -->
+    <div class="widget weather">
+        <div class="weather-forecast">
+            <div class="hour weather-forecast-now">Now</div>
+            <div>25°C ☀️</div>
+        </div>
+        <div class="weather-forecast">
+            <div class="hour">+1hr</div>
+            <div>23°C 🌤️</div>
+        </div>
+        <div class="weather-forecast">
+            <div class="hour">+2hr</div>
+            <div>21°C 🌙</div>
+        </div>
+    </div>
+
+    <!-- Buses -->
+    <div class="widget buses">
+        <div>
+            <p class="bus-stop">[609] Leystraße</p>
+            <hr class="bus-stop-splitter"/>
+            <ul>
+                <li><span class="bus"><span class="bus-number">11A</span> Stadion U</span><br/> <span class="bus-time">5, 15 mins</span></li>
+                <li><span class="bus"><span class="bus-number">5A</span> Nestroyplatz U</span><br /> <span class="bus-time">12, 20 mins</span></li>
+            </ul>
+        </div>
+        <br/>
+        <div>
+            <p class="bus-stop">[590] Friedrich-Engels-Platz</p>
+            <hr class="bus-stop-splitter"/>
+            <ul>
+                <li><span class="bus"><span class="bus-number">11B</span> Hillerstraße</span><br /> <span class="bus-time">7, 24 mins</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Update the clock in real time
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+
+        // Update date
+        const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+        const fullDate = now.toLocaleDateString('en-US', options);
+        document.getElementById('date').textContent = fullDate;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+</body>
+</html>
