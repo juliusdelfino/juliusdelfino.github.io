@@ -107,6 +107,7 @@
         .bus-stop-div {
 
             padding: 10px 20px;
+            margin-bottom: 10px;
             border-radius: 18px;
             background-color: #2b2b2b;
         }
@@ -174,7 +175,7 @@
         @media (max-width: 720px) {
             .widget {
                 padding: 5px;
-                border-radius: 3px;
+                border-radius: 18px;
             }
 
             .clock {
@@ -183,7 +184,7 @@
 
             .clock-time span {
                 padding: 3px 6px;
-                border-radius: 5px;
+                border-radius: 18px;
             }
 
             .seconds {
@@ -221,7 +222,7 @@
             .bus-stop-div {
 
                 padding: 3px 6px;
-                border-radius: 5px;
+                border-radius: 12px;
             }
 
             .bus-stop {
@@ -304,16 +305,16 @@
         <div class="bus-stop-div">
             <p class="bus-stop"><span class="bus-stop-number">609</span> Leystraße</p>
             <ul id="bus-stop-home">
-                <li><span class="bus"><span class="bus-number">11A</span> Stadion U</span><br/> <span class="bus-time">5, 15 mins</span>
-                </li>
-                <li><span class="bus"><span class="bus-number">5A</span> Nestroyplatz U</span><br/> <span
-                        class="bus-time">12, 20 mins</span></li>
             </ul>
         </div>
-        <br/>
         <div class="bus-stop-div">
             <p class="bus-stop"><span class="bus-stop-number">590</span> Friedrich-Engels-Platz</p>
             <ul id="bus-stop-other">
+            </ul>
+        </div>
+        <div class="bus-stop-div">
+            <p class="bus-stop"><span class="bus-stop-number">626</span> Leystraße</p>
+            <ul id="bus-stop-opp">
             </ul>
         </div>
     </div>
@@ -349,6 +350,10 @@ function updateBusWt() {
     $.get( "https://sagabus.herokuapp.com/bus?id=590", function( data ) {
         let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
         changeViewBusStopLarge('#bus-stop-other', data2);
+        dataCache = data;
+    });
+    $.get( "https://sagabus.herokuapp.com/bus?id=626", function( data ) {
+        changeViewBusStopLarge('#bus-stop-opp', data);
         dataCache = data;
     });
 }
