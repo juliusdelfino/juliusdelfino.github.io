@@ -193,7 +193,7 @@
             }
 
             .date {
-                font-size: 0.8rem;
+                font-size: 2rem;
                 margin-top: 5px;
             }
 
@@ -332,9 +332,7 @@ function updateClock() {
     document.getElementById('seconds').textContent = seconds;
 
     // Update date
-    const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-    const fullDate = now.toLocaleDateString('en-US', options);
-    document.getElementById('date').textContent = fullDate;
+    document.getElementById('date').textContent = moment(now).format('ddd, MMM DD');
 }
 
 function updateBusWt() {
