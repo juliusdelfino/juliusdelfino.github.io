@@ -312,11 +312,6 @@
             <ul id="bus-stop-other">
             </ul>
         </div>
-        <div class="bus-stop-div">
-            <p class="bus-stop"><span class="bus-stop-number">626</span> Leystraße</p>
-            <ul id="bus-stop-opp">
-            </ul>
-        </div>
     </div>
 </div>
 
@@ -350,10 +345,6 @@ function updateBusWt() {
     $.get( "https://sagabus.herokuapp.com/bus?id=590", function( data ) {
         let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
         changeViewBusStopLarge('#bus-stop-other', data2);
-        dataCache = data;
-    });
-    $.get( "https://sagabus.herokuapp.com/bus?id=626", function( data ) {
-        changeViewBusStopLarge('#bus-stop-opp', data);
         dataCache = data;
     });
 }
