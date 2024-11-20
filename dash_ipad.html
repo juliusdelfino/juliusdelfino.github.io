@@ -170,6 +170,105 @@
             height: 95vh;
         }
 
+        /* Responsive scaling for Raspberry PI */
+        @media (max-width: 720px) {
+            .widget {
+                padding: 5px;
+                border-radius: 3px;
+            }
+
+            .clock {
+                font-size: 6rem;
+            }
+
+            .clock-time span {
+                padding: 3px 6px;
+                border-radius: 5px;
+            }
+
+            .seconds {
+                font-size: 1rem;
+                margin-left: 2px;
+            }
+
+            .date {
+                font-size: 0.8rem;
+                margin-top: 5px;
+            }
+
+            .weather-forecast {
+                padding: 0 3px;
+                font-size: 0.7rem;
+            }
+
+            .weather .hour {
+                font-size: 1rem;
+            }
+
+            .weather-forecast-now {
+                font-size: 1.4rem;
+            }
+
+            .weather-forecast-now .summary {
+                font-size: 1rem;
+                line-height: 0.1;
+            }
+
+            .weather-forecast div {
+                font-size: 1rem;
+            }
+
+            .bus-stop-div {
+
+                padding: 3px 6px;
+                border-radius: 5px;
+            }
+
+            .bus-stop {
+                font-size: 0.7rem;
+                padding-bottom: 3px;
+                border-bottom: 1px solid black;
+            }
+
+            .buses {
+                font-size: 1rem;
+            }
+
+            .bus {
+                font-size: 1rem;
+            }
+
+            .bus-time {
+                font-size: 2rem;
+            }
+
+            .bus-stop-number {
+                padding: 0px px;
+                border-radius: 5px;
+            }
+
+            .bus-number {
+                font-size: 1rem;
+                padding: 0px 5px;
+                border-radius: 5px;
+            }
+
+            .buses ul {
+                list-style-type: none;
+                margin-bottom: 5px;
+            }
+
+            .buses ul li {
+                 margin-bottom: 5px;
+            }
+
+            .grid-container {
+                gap: 5px;
+                width: 95vw;
+                height: 95vh;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -187,16 +286,16 @@
     <div class="widget weather">
         <div class="weather-forecast-now">
             <div class="hour">Now</div>
-            <div><span class="temp"></span>°C <img /></div>
+            <div><span class="temp"></span>°C <img/></div>
             <div class="summary"></div>
         </div>
         <div class="weather-forecast hr1">
             <div class="hour">+1hr</div>
-            <div><span class="temp"></span>°C <img /></div>
+            <div><span class="temp"></span>°C <img/></div>
         </div>
         <div class="weather-forecast hr2">
             <div class="hour">+2hr</div>
-            <div><span class="temp"></span>°C <img /></div>
+            <div><span class="temp"></span>°C <img/></div>
         </div>
     </div>
 
@@ -205,8 +304,10 @@
         <div class="bus-stop-div">
             <p class="bus-stop"><span class="bus-stop-number">609</span> Leystraße</p>
             <ul id="bus-stop-home">
-                <li><span class="bus"><span class="bus-number">11A</span> Stadion U</span><br/> <span class="bus-time">5, 15 mins</span></li>
-                <li><span class="bus"><span class="bus-number">5A</span> Nestroyplatz U</span><br /> <span class="bus-time">12, 20 mins</span></li>
+                <li><span class="bus"><span class="bus-number">11A</span> Stadion U</span><br/> <span class="bus-time">5, 15 mins</span>
+                </li>
+                <li><span class="bus"><span class="bus-number">5A</span> Nestroyplatz U</span><br/> <span
+                        class="bus-time">12, 20 mins</span></li>
             </ul>
         </div>
         <br/>
@@ -309,7 +410,7 @@ function toReadableWaitingTime(msTime) {
 setInterval(updateClock, 1000);
 updateClock();
 
-setInterval(updateBusWt, 60000);
+setInterval(updateWeather, 60000);
 updateWeather();
 
 setInterval(updateBusWt, 15000);
