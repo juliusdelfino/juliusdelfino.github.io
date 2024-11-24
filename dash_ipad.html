@@ -321,6 +321,18 @@ var DISP_TIME = 1;
 var DISP_MILLIS = 2;
 var displayMode = DISP_MINUTES;
 
+function getDeviceId() {
+    var navigator_info = window.navigator;
+    var screen_info = window.screen;
+    var uid = navigator_info.mimeTypes.length;
+    uid += navigator_info.userAgent.replace(/\D+/g, '');
+    uid += navigator_info.plugins.length;
+    uid += screen_info.height || '';
+    uid += screen_info.width || '';
+    uid += screen_info.pixelDepth || '';
+    return uid;
+}
+
 // Update the clock in real time
 function updateClock() {
     const now = new Date();
@@ -336,14 +348,32 @@ function updateClock() {
 }
 
 function updateBusWt() {
-    $.get( "https://sagabus.herokuapp.com/bus?id=609", function( data ) {
-        changeViewBusStopLarge('#bus-stop-home', data);
-        dataCache = data;
+
+    $.ajax({
+        url: "https://sagabus.herokuapp.com/bus?id=609",
+        type: "GET",
+        headers: {
+            "Device-Id": getDeviceId(),
+            "Device-Type": navigator.userAgent
+        },
+        success: function( data ) {
+            changeViewBusStopLarge('#bus-stop-home', data);
+            dataCache = data;
+        }
     });
-    $.get( "https://sagabus.herokuapp.com/bus?id=590", function( data ) {
-        let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
-        changeViewBusStopLarge('#bus-stop-other', data2);
-        dataCache = data;
+
+    $.ajax({
+        url: "https://sagabus.herokuapp.com/bus?id=590",
+        type: "GET",
+        headers: {
+            "Device-Id": getDeviceId(),
+            "Device-Type": navigator.userAgent
+        },
+        success: function( data ) {
+            let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
+            changeViewBusStopLarge('#bus-stop-other', data2);
+            dataCache = data;
+        }
     });
 }
 
@@ -352,7 +382,7 @@ function updateWeather() {
     $.get("https://api.msn.com/weather/overview?apikey=j5i4gDqHL6nGYwx5wi5kRhXjtf2c5qgFX9fzfk0TOo&units=C"
         + "&appId=9e21380c-ff19-4c78-b4ea-19558e93a5d3&wrapodata=false&cuthour=true&lifeDays=2&lifeModes=18"
         + "&includestorm=true&discardFutureInsightTimeseries=true&distanceinkm=0&orderby=distance&days=1&region=at"
-        + "&market=de-at&locale=en-us&lat=48.24073791503906&lon=16.368022918701172", function( data ) {
+        + "&market=de-at&locale=en-us&lat=48.243784&lon=16.379052", function( data ) {
             let weatherNow = data.responses[0].weather[0].current;
             let forecastHours = data.responses[0].weather[0].forecast.days[0].hourly;
 
