@@ -390,14 +390,17 @@ function updateWeather() {
             $(".weather-forecast-now img").attr("src", weatherNow.urlIcon);
             $(".weather-forecast-now .summary").text(weatherNow.cap);
 
+            if (forecastHours[0]) {
+                $(".weather .hr1 .temp").text(forecastHours[0].temp);
+                $(".weather .hr1 .hour").text(moment(forecastHours[0].valid).format('hh:mm'));
+                $(".weather .hr1 img").attr("src", forecastHours[0].urlIcon);
+            }
 
-            $(".weather .hr1 .temp").text(forecastHours[0].temp);
-            $(".weather .hr1 .hour").text(moment(forecastHours[0].valid).format('hh:mm'));
-            $(".weather .hr1 img").attr("src", forecastHours[0].urlIcon);
-
-            $(".weather .hr2 .temp").text(forecastHours[1].temp);
-            $(".weather .hr2 .hour").text(moment(forecastHours[1].valid).format('hh:mm'));
-            $(".weather .hr2 img").attr("src", forecastHours[1].urlIcon);
+            if (forecastHours[1]) {
+                $(".weather .hr2 .temp").text(forecastHours[1].temp);
+                $(".weather .hr2 .hour").text(moment(forecastHours[1].valid).format('hh:mm'));
+                $(".weather .hr2 img").attr("src", forecastHours[1].urlIcon);
+            }
 
         });
 }
