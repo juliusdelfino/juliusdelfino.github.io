@@ -379,17 +379,21 @@ function updateBusWt() {
 
 function updateWeather() {
 
+    let includeTomorrowData =  moment().hour() >= 22;
+    let numDays = includeTomorrowData ? 2 : 1; //2-day hourly data needed if querying at 10PM onwards, otherwise 1-day is enough
     $.get("https://api.msn.com/weather/overview?apikey=j5i4gDqHL6nGYwx5wi5kRhXjtf2c5qgFX9fzfk0TOo&units=C"
         + "&appId=9e21380c-ff19-4c78-b4ea-19558e93a5d3&wrapodata=false&cuthour=true&lifeDays=2&lifeModes=18"
-        + "&includestorm=true&discardFutureInsightTimeseries=true&distanceinkm=0&orderby=distance&days=1&region=at"
+        + "&includestorm=true&discardFutureInsightTimeseries=true&distanceinkm=0&orderby=distance&days=" + numDays + "&region=at"
         + "&market=de-at&locale=en-us&lat=48.243784&lon=16.379052", function( data ) {
             let weatherNow = data.responses[0].weather[0].current;
-            let forecastHours = data.responses[0].weather[0].forecast.days[0].hourly;
+            var forecastHours = data.responses[0].weather[0].forecast.days[0].hourly;
+            if (includeTomorrowData) {
+                forecastHours = [...forecastHours, ...data.responses[0].weather[0].forecast.days[1].hourly];
+            }
 
             $(".weather-forecast-now .temp").text(weatherNow.temp);
             $(".weather-forecast-now img").attr("src", weatherNow.urlIcon);
             $(".weather-forecast-now .summary").text(weatherNow.cap);
-
 
             $(".weather .hr1 .temp").text(forecastHours[0].temp);
             $(".weather .hr1 .hour").text(moment(forecastHours[0].valid).format('hh:mm'));
@@ -398,7 +402,6 @@ function updateWeather() {
             $(".weather .hr2 .temp").text(forecastHours[1].temp);
             $(".weather .hr2 .hour").text(moment(forecastHours[1].valid).format('hh:mm'));
             $(".weather .hr2 img").attr("src", forecastHours[1].urlIcon);
-
         });
 }
 
