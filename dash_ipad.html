@@ -408,7 +408,7 @@ function changeViewBusStopLarge(bus_wt_id, data) {
       var busInfo = data.services[idx];
       var bus_wt_id_large = (idx < 4) ? bus_wt_id : bus_wt_id + "-2";
       let busNo = busInfo.no;
-      let busHeadsign = busInfo.sign;
+      let busHeadsign = busInfo.headsign;
       let busTimeNext = busInfo.next != null ? toReadableWaitingTime(busInfo.next.duration_ms) : "";
       let busTimeNext2 = busInfo.next2 != null ? toReadableWaitingTime(busInfo.next2.duration_ms) : "";
       let busTimes = [busTimeNext, busTimeNext2].filter(s => s).join(", ");
