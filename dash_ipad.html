@@ -350,7 +350,7 @@ function updateClock() {
 function updateBusWt() {
 
     $.ajax({
-        url: "https://sagabus.herokuapp.com/bus?id=609",
+        url: "https://transit.jdelfino.com/bus?id=609",
         type: "GET",
         headers: {
             "Device-Id": getDeviceId(),
@@ -363,7 +363,7 @@ function updateBusWt() {
     });
 
     $.ajax({
-        url: "https://sagabus.herokuapp.com/bus?id=590",
+        url: "https://transit.jdelfino.com/bus?id=590",
         type: "GET",
         headers: {
             "Device-Id": getDeviceId(),
