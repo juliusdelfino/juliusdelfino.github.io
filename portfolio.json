@@ -1,0 +1,62 @@
+[
+  {
+    "id": "project-alpha",
+    "title": "Project Alpha",
+    "category": "Web Development",
+    "description": "A responsive web application built from scratch using vanilla JavaScript and modern CSS. Features include real-time data visualization, offline support via service workers, and a custom component system. The project served as a proof of concept for building complex UIs without framework overhead, achieving a Lighthouse score of 98.",
+    "tags": ["JavaScript", "CSS", "API"],
+    "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2024"
+  },
+  {
+    "id": "trail-mapper",
+    "title": "Trail Mapper",
+    "category": "Open Source",
+    "description": "An open-source hiking trail visualization tool that renders GPX data on interactive maps. Users can upload their GPS tracks, annotate points of interest, and share routes with elevation profiles. Built with Leaflet.js and a lightweight Node backend, it has grown to over 2,000 stars on GitHub and an active contributor community.",
+    "tags": ["Node.js", "Leaflet", "GPX", "Maps"],
+    "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2024"
+  },
+  {
+    "id": "spectrum-ui",
+    "title": "Spectrum UI",
+    "category": "Design",
+    "description": "A design system and component library focused on accessibility and nature-inspired aesthetics. Includes over 40 components with full WCAG 2.1 AA compliance, dark mode support, and Figma integration. The system uses CSS custom properties extensively for theming and has been adopted by three internal teams.",
+    "tags": ["Design Systems", "Figma", "Accessibility", "CSS"],
+    "image": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2023"
+  },
+  {
+    "id": "data-grove",
+    "title": "Data Grove",
+    "category": "Data",
+    "description": "A data pipeline and dashboard for analyzing environmental sensor data collected from forest monitoring stations. Ingests CSV and JSON feeds, runs anomaly detection, and presents trends through interactive charts. Built with Python for the backend ETL and D3.js for the visualization layer.",
+    "tags": ["Python", "D3.js", "Data Viz", "ETL"],
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2023"
+  },
+  {
+    "id": "cli-forest",
+    "title": "CLI Forest",
+    "category": "CLI Tools",
+    "description": "A collection of command-line utilities for developers who work in the terminal. Includes a tree-style directory printer with git-aware coloring, a fast file searcher with fuzzy matching, and a Markdown-to-terminal renderer. Written in Rust for performance, distributed as a single binary.",
+    "tags": ["Rust", "CLI", "Terminal", "Developer Tools"],
+    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2024"
+  },
+  {
+    "id": "weather-canvas",
+    "title": "Weather Canvas",
+    "category": "Web Development",
+    "description": "A generative art project that transforms live weather data into abstract canvas paintings. Each city produces a unique visual based on temperature, humidity, wind, and cloud cover. Uses the Canvas API and Web Audio API to create synesthetic experiences where weather becomes both visual and auditory art.",
+    "tags": ["Canvas API", "Generative Art", "Web Audio", "API"],
+    "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
+    "link": "https://github.com",
+    "year": "2025"
+  }
+]

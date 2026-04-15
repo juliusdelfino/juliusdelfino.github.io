@@ -1,0 +1,861 @@
+/* ──────────────────────────────────────────────
+   10. Pages — Home / Hero
+   ────────────────────────────────────────────── */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--navbar-height));
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero-title {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35), 0 0 60px rgba(0, 0, 0, 0.15);
+  margin-bottom: 0.3em;
+  letter-spacing: -0.02em;
+  /* Shimmer / gradient animation */
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #fff 40%,
+    var(--accent-sky) 50%,
+    #fff 60%,
+    #fff 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+.hero-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+  max-width: 50ch;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.01em;
+}
+
+.scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  animation: bounce 2s ease-in-out infinite;
+  transition: color var(--transition-fast);
+}
+
+.scroll-arrow:hover {
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────
+   11. Pages — Home / Post Cards
+   ────────────────────────────────────────────── */
+.recent-posts {
+  padding: 3rem 2rem 4rem;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.section-heading {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  padding-left: 0.2em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.post-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-card-content {
+  padding: 1.2rem 1.4rem 1.4rem;
+}
+
+.post-card-content h3 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4em;
+  line-height: 1.3;
+}
+
+.post-card-content time {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.post-card-content p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card-content .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin-top: 0.6em;
+}
+
+/* Featured card — full-width */
+.featured-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 320px;
+  margin-bottom: 1rem;
+}
+
+.featured-card-image {
+  height: 100%;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.featured-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.featured-card-content h3 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4em;
+  line-height: 1.3;
+}
+
+.featured-card-content time {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.featured-card-content p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-card-content .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+.featured-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.5em;
+}
+
+/* ──────────────────────────────────────────────
+   12. Pages — About
+   ────────────────────────────────────────────── */
+.about-page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.about-header {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.about-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-placeholder {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.about-name {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2em;
+}
+
+.about-tagline {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.about-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.4rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  text-align: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.stat-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.stat-chip .stat-number {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.stat-chip .stat-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2em;
+}
+
+/* About content area */
+.content-card {
+  max-width: var(--reading-max);
+  margin: 0 auto 3rem;
+  padding: 2.5rem 3rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.content-card h2 {
+  margin-top: 1.5em;
+}
+
+.content-card h2:first-child {
+  margin-top: 0;
+}
+
+.content-card ul,
+.content-card ol {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+  color: var(--text-secondary);
+}
+
+.content-card ol {
+  list-style: decimal;
+}
+
+.content-card li {
+  margin-bottom: 0.4em;
+  line-height: 1.7;
+}
+
+/* ──────────────────────────────────────────────
+   13. Pages — Portfolio
+   ────────────────────────────────────────────── */
+.portfolio-page {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 2rem;
+  align-items: start;
+}
+
+.portfolio-sidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + 1.5rem);
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  max-height: calc(100vh - var(--navbar-height) - 3rem);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.portfolio-sidebar .filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.55em 0.8em;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.sidebar-item.active {
+  background: rgba(76, 175, 125, 0.12);
+  color: var(--accent);
+  font-weight: 600;
+  border-left-color: var(--accent);
+}
+
+.sidebar-item-title {
+  font-weight: 500;
+}
+
+.sidebar-item-category {
+  font-size: 0.72rem;
+  margin-top: 0.2em;
+}
+
+/* Portfolio main area */
+.portfolio-main {
+  min-width: 0; /* prevent grid blowout */
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.project-card-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.project-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card-content {
+  padding: 1.2rem 1.3rem 1.4rem;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3em;
+}
+
+.project-card-content h3 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.project-year {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.project-card-content p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0.5em 0 0.7em;
+}
+
+.project-card-content .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin-bottom: 0.8em;
+}
+
+.project-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Project detail view */
+.project-detail {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--accent-forest);
+}
+
+.project-detail h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.project-detail-image {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.project-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.project-description {
+  max-width: var(--reading-max);
+  line-height: 1.8;
+  margin-bottom: 1.5em;
+}
+
+.project-detail .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin-bottom: 1.5rem;
+}
+
+.project-detail .btn {
+  margin-top: 1rem;
+}
+
+/* ──────────────────────────────────────────────
+   14. Pages — Blog Post
+   ────────────────────────────────────────────── */
+.blog-hero {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  min-height: 320px;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-bottom: 2rem;
+}
+
+.blog-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 3rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.35) 60%,
+    transparent 100%
+  );
+}
+
+.blog-hero-overlay h1 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  line-height: 1.15;
+  margin-bottom: 0.3em;
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.blog-meta time {
+  font-weight: 500;
+}
+
+.read-time {
+  opacity: 0.8;
+}
+
+.blog-meta .tags {
+  display: flex;
+  gap: 0.4em;
+}
+
+/* Blog body layout */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  max-width: calc(var(--reading-max) + 240px + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  align-items: start;
+}
+
+.blog-body {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem 3rem;
+  max-width: var(--reading-max);
+  min-width: 0;
+  line-height: 1.8;
+}
+
+.blog-body h2,
+.blog-body h3,
+.blog-body h4 {
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.blog-body h2:first-child {
+  margin-top: 0;
+}
+
+.blog-body ul,
+.blog-body ol {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+  color: var(--text-secondary);
+}
+
+.blog-body ol { list-style: decimal; }
+
+.blog-body li {
+  margin-bottom: 0.4em;
+  line-height: 1.7;
+}
+
+.blog-body img {
+  border-radius: var(--radius-sm);
+  margin: 1.5em 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Table of contents — sidebar */
+.toc {
+  position: sticky;
+  top: calc(var(--navbar-height) + 1.5rem);
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.3rem 1.5rem;
+  max-height: calc(100vh - var(--navbar-height) - 3rem);
+  overflow-y: auto;
+}
+
+.toc h4 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.toc nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.toc-link {
+  display: block;
+  padding: 0.3em 0.6em;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.toc-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.toc-link.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: rgba(76, 175, 125, 0.08);
+  font-weight: 500;
+}
+
+.toc-link.toc-h3 {
+  padding-left: 1.4em;
+  font-size: 0.78rem;
+}
+
+/* Blog footer nav */
+.blog-post-page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.blog-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: calc(var(--reading-max) + 240px + 2.5rem);
+  margin: 2rem auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.blog-nav-link {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.4rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.blog-nav-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.blog-nav-dir {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+.blog-nav-title {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2em;
+}
+
+.blog-nav-link time {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.next-post {
+  text-align: right;
+}
+
+/* Error page */
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--navbar-height));
+  padding: 2rem;
+}
+
+/* Portfolio intro */
+.portfolio-intro {
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+}

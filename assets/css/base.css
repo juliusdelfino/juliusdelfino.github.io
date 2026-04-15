@@ -1,0 +1,304 @@
+/* ============================================================
+   style.css — Glassmorphism SPA Blog
+   Sections: Reset | Variables | Typography | Layout | Components
+             Glass | Pages | Tools | Responsive | Animations
+   ============================================================ */
+
+/* ──────────────────────────────────────────────
+   1. Google Fonts
+   ────────────────────────────────────────────── */
+/* Google Fonts: Cascadia Code (headings) + Inter (body) loaded via <link> in index.html */
+
+/* ──────────────────────────────────────────────
+   2. Reset
+   ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+/* ──────────────────────────────────────────────
+   3. CSS Variables — Light Theme (default)
+   ────────────────────────────────────────────── */
+:root {
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.22);
+
+  /* Text */
+  --text-primary: #1a1a2e;
+  --text-secondary: #444466;
+
+  /* Overlay */
+  --bg-overlay: rgba(255, 255, 255, 0.45);
+
+  /* Accent */
+  --accent: #2e7d52;
+
+  /* Nature palette */
+  --accent-forest: #4caf7d;
+  --accent-sky: #5ab4e5;
+  --accent-earth: #c8a46e;
+  --accent-mist: #a8bfc9;
+
+  /* Derived / utility */
+  --glass-blur: blur(18px) saturate(160%);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.24);
+  --transition-fast: 0.2s ease;
+  --transition-med: 0.35s ease;
+  --navbar-height: 64px;
+  --content-max: 1200px;
+  --reading-max: 72ch;
+}
+
+/* ──────────────────────────────────────────────
+   3b. CSS Variables — Dark Theme
+   ────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --text-primary: #f0f0f5;
+  --text-secondary: #b0b0c0;
+  --bg-overlay: rgba(0, 0, 0, 0.55);
+  --accent: #4caf7d;
+}
+
+/* ──────────────────────────────────────────────
+   4. Typography
+   ────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2.4rem; margin-bottom: 0.5em; }
+h2 { font-size: 1.8rem; margin-bottom: 0.4em; }
+h3 { font-size: 1.35rem; margin-bottom: 0.35em; }
+h4 { font-size: 1.15rem; margin-bottom: 0.3em; }
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1em;
+  line-height: 1.75;
+}
+
+strong { font-weight: 600; color: var(--text-primary); }
+
+a:not(.nav-link):not(.nav-brand) {
+  color: var(--accent);
+  transition: color var(--transition-fast);
+}
+a:not(.nav-link):not(.nav-brand):hover {
+  color: var(--accent-forest);
+}
+
+small {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 0.8em 1.2em;
+  margin: 1.2em 0;
+  background: var(--glass-bg);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+[data-theme="dark"] code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+pre {
+  position: relative;
+  margin: 1.5em 0;
+  padding: 1.4em 1.6em;
+  background: rgba(20, 20, 35, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  max-width: 100%;
+  color: #e0e0e8;
+  line-height: 1.65;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+  max-width: 100%;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.88em;
+  color: inherit;
+}
+
+pre .lang-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.2em 0.7em;
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 0 var(--radius-sm) 0 var(--radius-xs);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--glass-border);
+  margin: 2em 0;
+}
+
+/* ──────────────────────────────────────────────
+   5. Layout — Background & Body
+   ────────────────────────────────────────────── */
+
+/* Full-viewport nature photo background */
+body {
+  position: relative;
+  background-color: #1a1a2e;
+  background-image: var(--bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Light mode: slightly brighten the background */
+:root body {
+  filter: none; /* brightness handled via overlay */
+}
+
+/* Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: 0;
+  pointer-events: none;
+  transition: background var(--transition-med);
+}
+
+/* Main app container */
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding-top: var(--navbar-height);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ──────────────────────────────────────────────
+   6. Components — Glass Base
+   ────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(18px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.88);
+  }
+  [data-theme="dark"] .glass {
+    background: rgba(30, 30, 50, 0.92);
+  }
+}
