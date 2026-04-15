@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juju Journal</title>
+  <script>
+    /* GitHub Pages SPA redirect: encodes path into hash and redirects to index.html */
+    (function() {
+      var segmentCount = 0;
+      var loc = window.location;
+      loc.replace(
+        loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port : '') +
+        loc.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/#/' +
+        loc.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (loc.search ? '~q~' + loc.search.slice(1).replace(/&/g, '~and~') : '') +
+        loc.hash
+      );
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>

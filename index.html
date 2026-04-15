@@ -1,158 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-    <title>Juju Project</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/index.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juju Journal</title>
+  <meta name="description" content="A static blog about technology, nature, and everything in between.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    /* Apply saved theme immediately to prevent flash — default is dark */
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Juju Project</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Projects</a>
-                </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-</header>
-
-<main role="main">
-
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active" style="background: lightblue url('images/marina_barrage.gif') no-repeat left; background-size: cover">
-                <div class="container">
-                    <div class="carousel-caption text-left">
-                        <span class="main-title">JUJU</span><br/>
-                        <span class="sub-title">PROJECT</span><br/>
-                        <p class="sub-text">Travel &middot; Music &middot; Coding</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+  <nav class="navbar glass">
+    <a href="#/" class="nav-brand">Juju Journal</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#/" class="nav-link">Home</a>
+        <a href="#/about" class="nav-link">About</a>
+        <a href="#/portfolio" class="nav-link">Portfolio</a>
+      </div>
+      <button id="search-btn" class="nav-icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+      <button id="theme-toggle" class="nav-icon-btn" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </nav>
 
+  <div id="mobile-menu" class="mobile-menu glass">
+    <a href="#/" class="nav-link">Home</a>
+    <a href="#/about" class="nav-link">About</a>
+    <a href="#/portfolio" class="nav-link">Portfolio</a>
+  </div>
 
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
+  <main id="app" class="page-transition"></main>
 
-    <div class="container marketing">
+  <footer class="site-footer glass">
+    <div class="footer-inner">
+      <span class="footer-brand">Juju Journal</span>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://stackoverflow.com" target="_blank" rel="noopener noreferrer" aria-label="Stack Overflow">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.905-1.94-9.702-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154z"/></svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <span class="footer-copy">&copy; 2025 Juju Journal</span>
+    </div>
+  </footer>
 
-        <!-- Three columns of text below the carousel -->
-        <div class="row">
-            <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
-                    <image x="0" y="0" height="140" width="140"  xlink:href="images/stocks.svg" />
-                </svg>
-                <h2>PSE Viewer</h2>
-                <p>Monitor your Philippine stocks easily using this convenient tool. Sort stocks, save favorites and view charts.</p>
-                <p><a class="btn btn-secondary" href="https://psei.jdelfino.com/" role="button">View website &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
-                    <image x="0" y="0" height="140" width="140"  xlink:href="images/work.svg" />
-                </svg>
-                <h2>Lotto Analytics</h2>
-                <p>Search lotto results quickly. Browse all available data and use more granular search filters.</p>
-                <p><a class="btn btn-secondary" href="https://lotto.jdelfino.com/" role="button">View website &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
-                    <image x="0" y="0" height="140" width="140"  xlink:href="images/clock.svg" />
-                </svg>
-                <h2>Bus Stop Kiosk</h2>
-                <p>A kiosk to display waiting times of buses in nearby stops. Projected to our TV for personal consumption.</p>
-                <p><a class="btn btn-secondary" href="https://jdelfino.com/dashpi.html" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-
-
-        <!-- START THE FEATURETTES -->
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading"><span class="text-muted">Garmin - </span> SG Bus Times</h2>
-                <p class="lead">Frequent bus riders in Singapore, you can now search for nearby buses within 350 meters and save them on your watch!
-                    Search for nearby bus stops, and view ALL available buses and their arrival times by scrolling up and down, and select which ones to favorite.</p>
-                <p><a class="btn btn-secondary" href="https://apps.garmin.com/en-US/apps/189f756c-78e5-4878-b1da-c734ef90153d" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-5 photo">
-                <img src="images/bus-sg-garmin-cover-photo7.png" />
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Database Viewer</h2>
-                <p class="lead">The most lightweight, high-speed, highly configurable, web-based database client using Java's Spark Web, Velocity's HTML templating, and the Ruby on Rails framework concepts. It supports virtually all types of databases, including MySQL, PostgreSQL, Microsoft SQL, Phoenix, Ignite Cache, and Presto, among others.</p>
-                <p><a class="btn btn-secondary" href="https://github.com/juliodelfino/db_ui" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-5 order-md-1 photo">
-                <img src="images/db-info-page.png" />
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Electric Drum Set.<br/><span class="text-muted"> For Rent (Singapore).</span></h2>
-                <p class="lead">Yamaha DTX452K electric drumkit for rent<br/>
-                    $40 per week<br/>
-                    Pick up at Telok Blangah Heights</p>
-                <p><a class="btn btn-secondary" href="https://sg.carousell.com/p/electric-drum-set-4-rent-186203583" role="button">View details &raquo;</a></p>
-
-            </div>
-            <div class="col-md-5 photo">
-                <img src="images/electric_drum_set_4_rent.jpg" />
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
-
-    </div><!-- /.container -->
-
-
-    <!-- FOOTER -->
-    <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2019 Juju Project &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
-</main>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

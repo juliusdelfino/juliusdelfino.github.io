@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "building-this-blog",
+    "title": "Building This Blog",
+    "date": "2025-01-15",
+    "excerpt": "How I built a zero-dependency static blog in a weekend.",
+    "tags": ["code", "web"],
+    "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80"
+  },
+  {
+    "slug": "20211015-garmin-sg-bus-times",
+    "title": "Garmin - SG Bus Times",
+    "date": "2021-10-15",
+    "excerpt": "I built a Garmin app to check for bus times in Singapore in real-time using LTA data.",
+    "tags": ["tech", "garmin", "singapore"],
+    "coverImage": "/images/bus-sg-garmin-cover-photo7.png"
+  },
+  {
+    "slug": "20130126_my_happiness_project",
+    "title": "My Happiness Project",
+    "date": "2013-01-26",
+    "excerpt": "My speech during a Japanese Speech contest that I joined for the second time, held in SM City Cebu.",
+    "tags": ["personal", "speech contest"],
+    "coverImage": "https://i.ytimg.com/vi/kfEKa5Fd_Hc/hq720.jpg"
+  },
+  {
+    "slug": "20101103-nihongo-speech-contest",
+    "title": "To Where is this Road Taking Me?",
+    "date": "2010-11-03",
+    "excerpt": "My speech during a Japanese Speech contest that I joined for the first time, held in NEC Cebu Office.",
+    "tags": ["personal", "speech contest"],
+    "coverImage": "https://blog.gale.com/wp-content/uploads/2019/09/RNT.jpg"
+  }
+]
