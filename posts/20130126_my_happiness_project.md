@@ -82,4 +82,5 @@ Thank you for listening.
 
 
 ## Watch the video
-[![My Happiness Project](https://i.ytimg.com/vi/kfEKa5Fd_Hc/hq720.jpg)](https://www.youtube.com/watch?v=kfEKa5Fd_Hc)
+{{youtube:kfEKa5Fd_Hc}}
+

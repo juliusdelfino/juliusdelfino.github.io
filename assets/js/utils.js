@@ -1,4 +1,5 @@
 import { parseMarkdown } from './markdown-parser.js';
+import { processShortcodes } from './shortcodes.js';
 
 /** @type {Array} Cached post manifest */
 let postsCache = null;
@@ -49,10 +50,10 @@ export async function getPortfolio() {
   return portfolioCache;
 }
 
-/** Fetches a markdown file and returns parsed HTML */
+/** Fetches a markdown file, parses it, and expands shortcodes */
 export async function fetchMarkdown(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   const md = await res.text();
-  return parseMarkdown(md);
+  return processShortcodes(parseMarkdown(md));
 }

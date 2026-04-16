@@ -1,13 +1,13 @@
 [
   {
-    "id": "project-alpha",
-    "title": "Project Alpha",
+    "id": "lotto-miner",
+    "title": "LottoMiner",
     "category": "Web Development",
-    "description": "A responsive web application built from scratch using vanilla JavaScript and modern CSS. Features include real-time data visualization, offline support via service workers, and a custom component system. The project served as a proof of concept for building complex UIs without framework overhead, achieving a Lighthouse score of 98.",
-    "tags": ["JavaScript", "CSS", "API"],
-    "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80",
-    "link": "https://github.com",
-    "year": "2024"
+    "description": "My first Ruby on Rails project, a simple tool to analyze historical PCSO lotto data. I know lotto is entirely random and unpredictable, but at this point I was curious about patterns and trends in the data.<br>I grew up tending to our family lotto ticket business, and this image is taken straight from the Google Maps Street View of our store in Cebu City.",
+    "tags": ["Ruby", "Rails", "HTML"],
+    "image": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFFqR3NjQnw-RJK4LhfthRNMhF3ut0eM5ok7lJNViJsAnD72XLs4oIUxUqvvAHnMkg647YtkOGUjmtGadRWGIFcVaiSKf3f6TBPwCv-OADMbYTQcUIf0rTMHTWqqFz-Mco6KdKugHAVeHM-xLjznOov2vD637SI9SmU9TwVM0asucVDQdQmkSOOHJgmzTcgwzHhZ38=w1003-h514-k-no",
+    "link": "https://github.com/juliusdelfino/lottominer_git",
+    "year": "2017"
   },
   {
     "id": "trail-mapper",
