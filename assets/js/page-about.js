@@ -1,4 +1,5 @@
 import { fetchMarkdown, renderError } from './utils.js';
+import { initShortcodes } from './shortcodes.js';
 
 /** Renders the about page */
 export async function renderAbout(app) {
@@ -46,4 +47,6 @@ export async function renderAbout(app) {
         ${html}
       </div>
     </section>`;
+
+  initShortcodes();
 }

@@ -1,5 +1,6 @@
-import { getPosts, fetchMarkdown, formatDate, readTime, renderError } from './utils.js';
+import { getPosts, formatDate, readTime, renderError } from './utils.js';
 import { parseMarkdown } from './markdown-parser.js';
+import { processShortcodes, initShortcodes } from './shortcodes.js';
 
 /** Renders a blog post page */
 export async function renderBlogPost(app, slug) {
@@ -26,7 +27,7 @@ export async function renderBlogPost(app, slug) {
     return;
   }
 
-  const html = parseMarkdown(md);
+  const html = processShortcodes(parseMarkdown(md));
   const mins = readTime(md);
 
   const headings = [];
@@ -91,4 +92,6 @@ export async function renderBlogPost(app, slug) {
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  initShortcodes();
 }
