@@ -1,33 +1,33 @@
 [
   {
+    "id": "expense-tracker",
+    "title": "Expense Tracker",
+    "category": "Web Development",
+    "description": "An AI-driven expense tracking app for scanning receipts and analyzing spending patterns. You can also talk to a chatbot for insights or management of your expenses. It uses Qwen3.5 for both OCR and Chatbot, powered by Ollama.",
+    "tags": ["Finance", "Ollama", "OCR", "Qwen3.5"],
+    "image": "/images/expense-tracker.png",
+    "link": "https://receipt.jdelfino.com/",
+    "year": "2026"
+  },
+  {
+    "id": "tansit-times",
+    "title": "Transit Times",
+    "category": "Web Development",
+    "description": "A successor to my SG Bus Times API for Garmin, this web app extends its coverage of providing real-time transit information for Vienna, and potentially other popular cities.",
+    "tags": ["Vienna", "Singapore", "Web", "Garmin"],
+    "image": "/images/transit-times.jpg",
+    "link": "https://transit.jdelfino.com/",
+    "year": "2026"
+  },
+  {
     "id": "lotto-miner",
     "title": "LottoMiner",
     "category": "Web Development",
-    "description": "My first Ruby on Rails project, a simple tool to analyze historical PCSO lotto data. I know lotto is entirely random and unpredictable, but at this point I was curious about patterns and trends in the data.<br>I grew up tending to our family lotto ticket business, and this image is taken straight from the Google Maps Street View of our store in Cebu City.",
+    "description": "My first Ruby on Rails project, a simple tool to analyze historical PCSO lotto data. I know lotto is entirely random and unpredictable, but at that point I was curious about patterns and trends in the data.",
     "tags": ["Ruby", "Rails", "HTML"],
     "image": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFFqR3NjQnw-RJK4LhfthRNMhF3ut0eM5ok7lJNViJsAnD72XLs4oIUxUqvvAHnMkg647YtkOGUjmtGadRWGIFcVaiSKf3f6TBPwCv-OADMbYTQcUIf0rTMHTWqqFz-Mco6KdKugHAVeHM-xLjznOov2vD637SI9SmU9TwVM0asucVDQdQmkSOOHJgmzTcgwzHhZ38=w1003-h514-k-no",
     "link": "https://github.com/juliusdelfino/lottominer_git",
     "year": "2017"
-  },
-  {
-    "id": "trail-mapper",
-    "title": "Trail Mapper",
-    "category": "Open Source",
-    "description": "An open-source hiking trail visualization tool that renders GPX data on interactive maps. Users can upload their GPS tracks, annotate points of interest, and share routes with elevation profiles. Built with Leaflet.js and a lightweight Node backend, it has grown to over 2,000 stars on GitHub and an active contributor community.",
-    "tags": ["Node.js", "Leaflet", "GPX", "Maps"],
-    "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
-    "link": "https://github.com",
-    "year": "2024"
-  },
-  {
-    "id": "spectrum-ui",
-    "title": "Spectrum UI",
-    "category": "Design",
-    "description": "A design system and component library focused on accessibility and nature-inspired aesthetics. Includes over 40 components with full WCAG 2.1 AA compliance, dark mode support, and Figma integration. The system uses CSS custom properties extensively for theming and has been adopted by three internal teams.",
-    "tags": ["Design Systems", "Figma", "Accessibility", "CSS"],
-    "image": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=800&q=80",
-    "link": "https://github.com",
-    "year": "2023"
   },
   {
     "id": "data-grove",
@@ -38,25 +38,5 @@
     "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     "link": "https://github.com",
     "year": "2023"
-  },
-  {
-    "id": "cli-forest",
-    "title": "CLI Forest",
-    "category": "CLI Tools",
-    "description": "A collection of command-line utilities for developers who work in the terminal. Includes a tree-style directory printer with git-aware coloring, a fast file searcher with fuzzy matching, and a Markdown-to-terminal renderer. Written in Rust for performance, distributed as a single binary.",
-    "tags": ["Rust", "CLI", "Terminal", "Developer Tools"],
-    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&q=80",
-    "link": "https://github.com",
-    "year": "2024"
-  },
-  {
-    "id": "weather-canvas",
-    "title": "Weather Canvas",
-    "category": "Web Development",
-    "description": "A generative art project that transforms live weather data into abstract canvas paintings. Each city produces a unique visual based on temperature, humidity, wind, and cloud cover. Uses the Canvas API and Web Audio API to create synesthetic experiences where weather becomes both visual and auditory art.",
-    "tags": ["Canvas API", "Generative Art", "Web Audio", "API"],
-    "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
-    "link": "https://github.com",
-    "year": "2025"
   }
 ]
