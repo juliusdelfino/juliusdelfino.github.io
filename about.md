@@ -45,3 +45,15 @@ Here's a talk that captures how I think about building for the web:
 A few photos from recent hikes:
 
 {{gallery:https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80,https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80,https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80,https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80,https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80,https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80}}
+
+## Contact Me
+
+I'd love to hear from you — whether it's a project idea, a question about something I've written, or just a friendly hello.
+
+- **Email**: [juliusldelfino@gmail.com](mailto:juliusldelfino@gmail.com)
+- **GitHub**: [github.com/juliusdelfino](https://github.com/juliusdelfino)
+- **LinkedIn**: [linkedin.com/in/jldelfino](https://linkedin.com/in/jldelfino)
+- **Stack Overflow**: [stackoverflow.com/users/3369952/julius-delfino](https://stackoverflow.com/users/3369952/julius-delfino)
+- **YouTube**: [@jhaqer](https://www.youtube.com/@jhaqer)
+
+For anything code-related, feel free to open an issue on the relevant GitHub repo — I check those regularly.
