@@ -107,6 +107,10 @@ function renderProjectCard(project) {
 
 /** Renders the full project detail view */
 function renderProjectDetail(project, allProjects) {
+  // Only render action buttons if the corresponding URLs are provided
+  const githubBtn = project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn">View on GitHub \u2192</a>` : '';
+  const siteBtn = project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn">View Website \u2192</a>` : '';
+
   return `
     <div class="project-detail glass">
       <a href="#/portfolio" class="back-link">\u2190 Back to all projects</a>
@@ -120,7 +124,8 @@ function renderProjectDetail(project, allProjects) {
       </div>
       <p class="project-description">${project.description}</p>
       <div class="tags">${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn">View on GitHub \u2192</a>
+      ${githubBtn}
+      ${siteBtn}
     </div>`;
 }
 
