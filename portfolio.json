@@ -25,8 +25,8 @@
     "category": "Web Development",
     "description": "My first Ruby on Rails project, a simple tool to analyze historical PCSO lotto data. I know lotto is entirely random and unpredictable, but at that point I was curious about patterns and trends in the data.",
     "tags": ["Ruby", "Rails", "HTML"],
-    "image": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFFqR3NjQnw-RJK4LhfthRNMhF3ut0eM5ok7lJNViJsAnD72XLs4oIUxUqvvAHnMkg647YtkOGUjmtGadRWGIFcVaiSKf3f6TBPwCv-OADMbYTQcUIf0rTMHTWqqFz-Mco6KdKugHAVeHM-xLjznOov2vD637SI9SmU9TwVM0asucVDQdQmkSOOHJgmzTcgwzHhZ38=w1003-h514-k-no",
-    "link": "https://github.com/juliusdelfino/lottominer_git",
+    "image": "/images/joesons-pcso-2.png",
+    "github": "https://github.com/juliusdelfino/lottominer_git",
     "year": "2017"
   },
   {

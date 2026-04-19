@@ -29,16 +29,12 @@ export async function renderAbout(app) {
             <span class="stat-label">Years Coding</span>
           </div>
           <div class="stat-chip glass">
-            <span class="stat-number">12</span>
-            <span class="stat-label">Projects Shipped</span>
+            <span class="stat-number">6</span>
+            <span class="stat-label">Personal Projects Shipped</span>
           </div>
           <div class="stat-chip glass">
             <span class="stat-number">3</span>
             <span class="stat-label">Countries Lived In</span>
-          </div>
-          <div class="stat-chip glass">
-            <span class="stat-number">1200+</span>
-            <span class="stat-label">KM Hiked</span>
           </div>
         </div>
       </div>
