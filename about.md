@@ -16,7 +16,7 @@ I care deeply about writing clean, maintainable code but I also prioritize custo
 - **Frameworks**: Spring Boot, Hibernate, Apache Commons, XML/JSON processors, Hadoop Stack, Testing (JUnit, Cucumber, Mockito, Selenium), jQuery, Rails, MS .NET
 - **Devops**: AWS (Data Pipeline, EMR, S3), Docker, Jenkins, SonarQube, Snyk, Grafana, Pometheus, ELK Stack, GCP
 - **Concepts**: REST, Microservices, Design Patterns, UML, EIP (Spring Integration), Web Services, Distributed Systems
-- **Domains**: Network-planning, Temporal-spatial data analytics, Geographical data (GIS), Banking (Acquisition, Reporting, Cash Management), Telecommunications equipment management, SDLC tool managemen
+- **Domains**: Network-planning, Temporal-spatial data analytics, Geographical data (GIS), Banking (Acquisition, Reporting, Cash Management), Telecommunications equipment management, SDLC tool management
 {{/collapse}}
 
 ## The Backstory
@@ -25,7 +25,7 @@ I enjoy coding since from the beginning, back in my university days at UP Cebu. 
 and after several other challenges, I enjoyed the process and the rewarding feeling of making something work. It was easily a path to a great career for me. And besides that,
 I discovered a passion of finding problems outside of work, setting up systems end-to-end and writing applications on weekends.
 
-Along the way I met my wife and had a kid in Singapore, singing and performing on stages during company DNDs,  lived in three countries, and have been enjoying travels around EU.
+Along the way I met my wife and had a kid in Singapore, enjoyed singing and performing on stages during company DNDs,  lived in three countries, and have been enjoying travels around EU.
 
 I've had tech talks at conferences and here are those:
 
@@ -36,7 +36,7 @@ I've had tech talks at conferences and here are those:
 {{collapse:Fun Facts}}
 - I can play music by ear
 - I can memorize the novenas of Sto. Niño de Cebu and Mother of Perpetual Help, it was unintentional, but thanks to my religious mom
-- I don't drink coffee, but I do enjoing going for "a cup of coffee" with friends
+- I don't drink coffee, but I do enjoy going for "a cup of coffee" with friends
 {{/collapse}}
 
 ## Travel Snapshots
