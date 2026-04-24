@@ -67,7 +67,7 @@ export async function renderPortfolio(app, projectId) {
       </aside>
 
       <div class="portfolio-main">
-        ${activeProject ? renderProjectDetail(activeProject, projects) : renderProjectGrid(projects, introHtml)}
+        ${activeProject ? renderProjectDetail(activeProject) : renderProjectGrid(projects, introHtml)}
         ${renderToolsSection()}
       </div>
     </section>`;
@@ -106,7 +106,7 @@ function renderProjectCard(project) {
 }
 
 /** Renders the full project detail view */
-function renderProjectDetail(project, allProjects) {
+function renderProjectDetail(project) {
   // Only render action buttons if the corresponding URLs are provided
   const githubBtn = project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn">View on GitHub \u2192</a>` : '';
   const siteBtn = project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn">View Website \u2192</a>` : '';
@@ -123,7 +123,6 @@ function renderProjectDetail(project, allProjects) {
         <span class="project-year">${project.year}</span>
       </div>
       <p class="project-description">${project.description}</p>
-      <div class="tags">${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
       ${githubBtn}
       ${siteBtn}
     </div>`;
