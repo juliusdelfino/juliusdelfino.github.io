@@ -377,31 +377,83 @@ function updateBusWt() {
     });
 }
 
+const WEATHER_ICONS = {
+    0:  ['clear-day',               'clear-night'],
+    1:  ['clear-day',               'clear-night'],
+    2:  ['partly-cloudy-day',       'partly-cloudy-night'],
+    3:  ['overcast',                'overcast'],
+    45: ['fog',                     'fog'],
+    48: ['fog',                     'fog'],
+    51: ['drizzle',                 'drizzle'],
+    53: ['drizzle',                 'drizzle'],
+    55: ['drizzle',                 'drizzle'],
+    61: ['rain',                    'rain'],
+    63: ['rain',                    'rain'],
+    65: ['rain',                    'rain'],
+    71: ['snow',                    'snow'],
+    73: ['snow',                    'snow'],
+    75: ['snow',                    'snow'],
+    80: ['partly-cloudy-day-rain',  'partly-cloudy-night-rain'],
+    81: ['rain',                    'rain'],
+    82: ['rain',                    'rain'],
+    95: ['thunderstorms',           'thunderstorms'],
+    96: ['thunderstorms-rain',      'thunderstorms-rain'],
+    99: ['thunderstorms-rain',      'thunderstorms-rain'],
+};
+
+const WEATHER_ICON_BASE = 'https://api.iconify.design/meteocons/';
+
+function weatherIcon(code, isDay) {
+    const pair = WEATHER_ICONS[code] || ['not-available', 'not-available'];
+    return WEATHER_ICON_BASE + pair[isDay ? 0 : 1] + '.svg?color=%23ffffff';
+}
+
+const WEATHER_LABELS = {
+    0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
+    45: 'Foggy', 48: 'Depositing rime fog',
+    51: 'Light drizzle', 53: 'Moderate drizzle', 55: 'Dense drizzle',
+    61: 'Slight rain', 63: 'Moderate rain', 65: 'Heavy rain',
+    71: 'Slight snow', 73: 'Moderate snow', 75: 'Heavy snow',
+    80: 'Slight rain showers', 81: 'Moderate rain showers', 82: 'Violent rain showers',
+    95: 'Thunderstorm', 96: 'Thunderstorm with slight hail', 99: 'Thunderstorm with heavy hail'
+};
+
+function weatherLabel(code) {
+    return WEATHER_LABELS[code] || 'Unknown';
+}
+
 function updateWeather() {
+    const lat = 48.243784;
+    const lon = 16.379052;
 
-    let includeTomorrowData =  moment().hour() >= 22;
-    let numDays = includeTomorrowData ? 2 : 1; //2-day hourly data needed if querying at 10PM onwards, otherwise 1-day is enough
-    $.get("https://api.msn.com/weather/overview?apikey=j5i4gDqHL6nGYwx5wi5kRhXjtf2c5qgFX9fzfk0TOo&units=C"
-        + "&appId=9e21380c-ff19-4c78-b4ea-19558e93a5d3&wrapodata=false&cuthour=true&lifeDays=2&lifeModes=18"
-        + "&includestorm=true&discardFutureInsightTimeseries=true&distanceinkm=0&orderby=distance&days=" + numDays + "&region=at"
-        + "&market=de-at&locale=en-us&lat=48.243784&lon=16.379052", function( data ) {
-            let weatherNow = data.responses[0].weather[0].current;
-            var forecastHours = data.responses[0].weather[0].forecast.days[0].hourly;
-            if (includeTomorrowData) {
-                forecastHours = [...forecastHours, ...data.responses[0].weather[0].forecast.days[1].hourly];
-            }
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,weathercode&timezone=auto`)
+        .then(res => res.json())
+        .then(wxData => {
+            const cw = wxData.current_weather;
+            const times = wxData.hourly.time;
+            const temps = wxData.hourly.temperature_2m;
+            const codes = wxData.hourly.weathercode;
 
-            $(".weather-forecast-now .temp").text(weatherNow.temp);
-            $(".weather-forecast-now img").attr("src", weatherNow.urlIcon);
-            $(".weather-forecast-now .summary").text(weatherNow.cap);
+            $(".weather-forecast-now .temp").text(cw.temperature);
+            $(".weather-forecast-now img").attr("src", weatherIcon(cw.weathercode, cw.is_day === 1)).attr("width", "64").attr("height", "64");
+            $(".weather-forecast-now .summary").text(weatherLabel(cw.weathercode));
 
-            $(".weather .hr1 .temp").text(forecastHours[0].temp);
-            $(".weather .hr1 .hour").text(moment(forecastHours[0].valid).format('hh:mm'));
-            $(".weather .hr1 img").attr("src", forecastHours[0].urlIcon);
+            let startIdx = times.findIndex(t => t >= cw.time);
+            if (startIdx < 0) startIdx = 0;
 
-            $(".weather .hr2 .temp").text(forecastHours[1].temp);
-            $(".weather .hr2 .hour").text(moment(forecastHours[1].valid).format('hh:mm'));
-            $(".weather .hr2 img").attr("src", forecastHours[1].urlIcon);
+            const hr1 = startIdx;
+            const hr2 = startIdx + 1;
+
+            const isDay1 = new Date(times[hr1]).getHours() >= 6 && new Date(times[hr1]).getHours() < 20;
+            const isDay2 = new Date(times[hr2]).getHours() >= 6 && new Date(times[hr2]).getHours() < 20;
+
+            $(".weather .hr1 .temp").text(temps[hr1]);
+            $(".weather .hr1 .hour").text(moment(times[hr1]).format('HH:mm'));
+            $(".weather .hr1 img").attr("src", weatherIcon(codes[hr1], isDay1)).attr("width", "48").attr("height", "48");
+
+            $(".weather .hr2 .temp").text(temps[hr2]);
+            $(".weather .hr2 .hour").text(moment(times[hr2]).format('HH:mm'));
+            $(".weather .hr2 img").attr("src", weatherIcon(codes[hr2], isDay2)).attr("width", "48").attr("height", "48");
         });
 }
 

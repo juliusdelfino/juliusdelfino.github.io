@@ -16,6 +16,44 @@ const WEATHER_LABELS = {
   95: 'Thunderstorm', 96: 'Thunderstorm with slight hail', 99: 'Thunderstorm with heavy hail'
 };
 
+/** WMO code → [day icon name, night icon name] for basmilius/weather-icons. */
+const WEATHER_ICONS = {
+  0:  ['clear-day',              'clear-night'],
+  1:  ['clear-day',              'clear-night'],
+  2:  ['partly-cloudy-day',      'partly-cloudy-night'],
+  3:  ['overcast',               'overcast'],
+  45: ['fog',                    'fog'],
+  48: ['fog',                    'fog'],
+  51: ['drizzle',                'drizzle'],
+  53: ['drizzle',                'drizzle'],
+  55: ['drizzle',                'drizzle'],
+  61: ['rain',                   'rain'],
+  63: ['rain',                   'rain'],
+  65: ['rain',                   'rain'],
+  71: ['snow',                   'snow'],
+  73: ['snow',                   'snow'],
+  75: ['snow',                   'snow'],
+  80: ['partly-cloudy-day-rain', 'partly-cloudy-night-rain'],
+  81: ['rain',                   'rain'],
+  82: ['rain',                   'rain'],
+  95: ['thunderstorms',          'thunderstorms'],
+  96: ['thunderstorms-rain',     'thunderstorms-rain'],
+  99: ['thunderstorms-rain',     'thunderstorms-rain'],
+};
+
+const WEATHER_ICON_BASE = 'https://api.iconify.design/meteocons/';
+
+/**
+ * Return the URL for the basmilius weather icon matching a WMO code.
+ * @param {number} code - WMO weather-interpretation code.
+ * @param {boolean} isDay - Whether it is daytime.
+ * @returns {string} SVG icon URL.
+ */
+function weatherIcon(code, isDay) {
+  const pair = WEATHER_ICONS[code] || ['not-available', 'not-available'];
+  return WEATHER_ICON_BASE + pair[isDay ? 0 : 1] + '.svg?color=%23ffffff';
+}
+
 /**
  * Return the human-readable label for a WMO weather code.
  * @param {number} code - WMO weather-interpretation code.
@@ -41,6 +79,7 @@ export function createWeatherTool() {
   <div id="weather-result" style="display:none">
     <div style="text-align:center;margin-bottom:12px">
       <div id="weather-city" style="font-size:1.4rem;font-weight:600"></div>
+      <img id="weather-icon" src="" alt="" style="display:none;width:64px;height:64px;margin:6px auto" />
       <div id="weather-temp" style="font-size:2.4rem;font-weight:700;margin:4px 0"></div>
       <div id="weather-condition" style="opacity:0.8"></div>
       <div id="weather-wind" style="opacity:0.7;font-size:0.9rem;margin-top:4px"></div>
@@ -86,6 +125,12 @@ export function initWeather() {
       document.getElementById('weather-condition').textContent = weatherLabel(cw.weathercode);
       document.getElementById('weather-wind').textContent = `Wind: ${cw.windspeed} km/h`;
 
+      const iconEl = document.getElementById('weather-icon');
+      if (iconEl) {
+        iconEl.src = weatherIcon(cw.weathercode, cw.is_day === 1);
+        iconEl.style.display = '';
+      }
+
       const hourlyContainer = document.getElementById('weather-hourly');
       hourlyContainer.innerHTML = '';
       const times = wxData.hourly.time;
@@ -99,9 +144,11 @@ export function initWeather() {
 
       for (let i = startIdx; i < startIdx + 5 && i < times.length; i++) {
         const hour = new Date(times[i]).getHours().toString().padStart(2, '0') + ':00';
+        const hourIsDay = new Date(times[i]).getHours() >= 6 && new Date(times[i]).getHours() < 20;
         hourlyContainer.innerHTML += `
           <div style="text-align:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.06);min-width:58px">
             <div style="font-size:0.8rem;opacity:0.7">${hour}</div>
+            <img src="${weatherIcon(codes[i], hourIsDay)}" alt="" style="width:32px;height:32px;margin:4px auto;display:block" />
             <div style="font-size:1.1rem;font-weight:600;margin:4px 0">${temps[i]}\u00B0</div>
             <div style="font-size:0.7rem;opacity:0.6">${weatherLabel(codes[i])}</div>
           </div>`;
