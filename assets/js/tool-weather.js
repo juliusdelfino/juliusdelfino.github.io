@@ -44,6 +44,15 @@ const WEATHER_ICONS = {
 const WEATHER_ICON_BASE = 'https://api.iconify.design/meteocons/';
 
 /**
+ * Open-Meteo forecast model. Options:
+ *   icon_seamless   – DWD ICON global+EU blend (recommended for AT/DE/CH)
+ *   icon_eu         – DWD ICON-EU regional (higher res, Central Europe)
+ *   ecmwf_ifs025    – ECMWF IFS 0.25° (global, often matches Google/MSN)
+ *   best_match      – Open-Meteo auto-selects best model for the location
+ */
+const WEATHER_MODEL = 'ecmwf_ifs025';
+
+/**
  * Return the URL for the basmilius weather icon matching a WMO code.
  * @param {number} code - WMO weather-interpretation code.
  * @param {boolean} isDay - Whether it is daytime.
@@ -116,7 +125,7 @@ export function initWeather() {
       if (!geoData.results || geoData.results.length === 0) throw new Error('City not found');
 
       const { latitude, longitude, name } = geoData.results[0];
-      const wxRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m,weathercode&timezone=auto`);
+      const wxRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m,weathercode&timezone=auto&models=${WEATHER_MODEL}`);
       const wxData = await wxRes.json();
       const cw = wxData.current_weather;
 

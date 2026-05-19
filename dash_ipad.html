@@ -422,11 +422,18 @@ function weatherLabel(code) {
     return WEATHER_LABELS[code] || 'Unknown';
 }
 
+// Open-Meteo forecast model. Options for Central Europe:
+//   icon_seamless        – DWD ICON global+EU blend (recommended for AT/DE/CH)
+//   icon_eu              – DWD ICON-EU regional (higher res, Central Europe)
+//   ecmwf_ifs025         – ECMWF IFS 0.25° (global, often matches Google/MSN)
+//   best_match           – Open-Meteo auto-selects best model for the location
+const WEATHER_MODEL = 'ecmwf_ifs025';
+
 function updateWeather() {
     const lat = 48.243784;
     const lon = 16.379052;
 
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,weathercode&timezone=auto`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,weathercode&timezone=auto&models=${WEATHER_MODEL}`)
         .then(res => res.json())
         .then(wxData => {
             const cw = wxData.current_weather;
