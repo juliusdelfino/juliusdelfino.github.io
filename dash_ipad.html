@@ -171,6 +171,14 @@
             height: 95vh;
         }
 
+        .device-id-debug {
+            position: fixed;
+            left: 8px;
+            bottom: 6px;
+            padding: 2px 5px;
+            font-size: 11px;
+        }
+
         /* Responsive scaling for Raspberry PI */
         @media (max-width: 720px) {
             .widget {
@@ -268,6 +276,15 @@
                 width: 95vw;
                 height: 95vh;
             }
+
+            .device-id-debug {
+                left: 4px;
+                bottom: 3px;
+                padding: 1px 3px;
+                font-size: 8px;
+                line-height: 1.15;
+                max-width: 98vw;
+            }
         }
 
     </style>
@@ -314,46 +331,110 @@
         </div>
     </div>
 </div>
+<div id="device-id-debug" class="device-id-debug">Device ID: loading...</div>
 
 <script>
     var DISP_MINUTES = 0;
 var DISP_TIME = 1;
 var DISP_MILLIS = 2;
 var displayMode = DISP_MINUTES;
+var DEVICE_ID_CACHE = null;
 
 function getDeviceId() {
-    const STORAGE_KEY = 'dash_ipad_device_id_v2';
+    if (DEVICE_ID_CACHE) return DEVICE_ID_CACHE;
+
+    const gl = getWebGLInfo();
+
+    const signals = [
+        // CPU
+        navigator.hardwareConcurrency,       // logical core count (e.g. 8)
+        navigator.deviceMemory,              // GB bucket (0.25 / 0.5 / 1 / 2 / 4 / 8)
+
+        // GPU — the most unique hardware signal available in a browser
+        gl.renderer,                         // e.g. "Apple M2", "NVIDIA RTX 4080"
+        gl.vendor,                           // e.g. "Apple Inc.", "NVIDIA Corporation"
+        gl.glVersion,                        // OpenGL/WebGL version string
+        gl.shadingLanguageVersion,           // GLSL version string
+        gl.maxTextureSize,                   // max texture dimension (varies by GPU)
+        gl.maxViewportDims,                  // [w, h] max viewport (varies by GPU)
+        gl.maxVertexAttribs,                 // fixed per GPU architecture
+        gl.aliasedLineWidthRange,            // [min, max] (GPU-specific)
+        gl.aliasedPointSizeRange,            // [min, max] (GPU-specific)
+        gl.maxRenderbufferSize,              // GPU memory limit indicator
+
+        // Display hardware
+        screen.width,
+        screen.height,
+        screen.colorDepth,                   // bits per pixel (24 vs 32, etc.)
+        window.devicePixelRatio,             // physical vs CSS pixels (e.g. 2 for Retina)
+
+        // Platform
+        navigator.platform,                  // "Win32", "MacIntel", "Linux armv7l", etc.
+        navigator.maxTouchPoints,            // 0 = mouse device, 5/10 = touch screen
+
+        // Locale (set during OS/browser install — rarely changes)
+        Intl.DateTimeFormat().resolvedOptions().timeZone,
+        navigator.language,
+    ].join('|');
+
+    const hash = sha256hex(signals);
+    DEVICE_ID_CACHE = hash.length % 2 === 0 ? hash : hash + '0';
+    return DEVICE_ID_CACHE;
+}
+
+function getWebGLInfo() {
+
+        const c = document.createElement('canvas');
+        const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+        if (!gl) return {};
+        const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+        return {
+            renderer:               dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : '',
+            vendor:                 dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL)   : '',
+            glVersion:              gl.getParameter(gl.VERSION),
+            shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
+            maxTextureSize:         gl.getParameter(gl.MAX_TEXTURE_SIZE),
+            maxViewportDims:        gl.getParameter(gl.MAX_VIEWPORT_DIMS),
+            maxVertexAttribs:       gl.getParameter(gl.MAX_VERTEX_ATTRIBS),
+            aliasedLineWidthRange:  gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE),
+            aliasedPointSizeRange:  gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE),
+            maxRenderbufferSize:    gl.getParameter(gl.MAX_RENDERBUFFER_SIZE),
+        };
+}
+
+function sha256hex(str) {
+    // Synchronous 128-bit non-cryptographic hash for stable client ID derivation.
+    let h1 = 0xdeadbeef ^ str.length;
+    let h2 = 0x41c6ce57 ^ str.length;
+    let h3 = 0xc0decafe ^ str.length;
+    let h4 = 0x9e3779b9 ^ str.length;
+
+    for (let i = 0; i < str.length; i++) {
+        const ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+        h3 = Math.imul(h3 ^ ch, 2246822507);
+        h4 = Math.imul(h4 ^ ch, 3266489909);
+    }
+
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h3 ^ (h3 >>> 13), 3266489909);
+    h3 = Math.imul(h3 ^ (h3 >>> 16), 2246822507) ^ Math.imul(h4 ^ (h4 >>> 13), 3266489909);
+    h4 = Math.imul(h4 ^ (h4 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+
+    const parts = [h1, h2, h3, h4].map(n => (n >>> 0).toString(16).padStart(8, '0'));
+    return parts.join('');
+}
+
+function updateDeviceIdDebugLabel() {
+    const el = document.getElementById('device-id-debug');
+    if (!el) return;
 
     try {
-        const existing = localStorage.getItem(STORAGE_KEY);
-        if (existing) return existing;
-
-        let id;
-        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
-            id = window.crypto.randomUUID();
-        } else {
-            const bytes = new Uint8Array(16);
-            if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
-                window.crypto.getRandomValues(bytes);
-            } else {
-                for (let i = 0; i < bytes.length; i++) {
-                    bytes[i] = Math.floor(Math.random() * 256);
-                }
-            }
-            id = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        localStorage.setItem(STORAGE_KEY, id);
-        return id;
+        const id = getDeviceId();
+        el.textContent = 'Device ID: ' + (id || 'unavailable');
     } catch (e) {
-        // Fallback for storage-restricted environments.
-        const seed = [navigator.userAgent, navigator.platform, navigator.language, navigator.vendor || ''].join('|');
-        let hash = 2166136261;
-        for (let i = 0; i < seed.length; i++) {
-            hash ^= seed.charCodeAt(i);
-            hash = Math.imul(hash, 16777619);
-        }
-        return (hash >>> 0).toString(16);
+        el.textContent = 'Device ID: error';
     }
 }
 
@@ -525,6 +606,8 @@ updateWeather();
 
 setInterval(updateBusWt, 15000);
 updateBusWt();
+
+updateDeviceIdDebugLabel();
 
 </script>
 </body>
