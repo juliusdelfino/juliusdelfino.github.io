@@ -320,12 +320,12 @@
     <!-- Buses -->
     <div class="widget buses">
         <div class="bus-stop-div">
-            <p class="bus-stop"><span class="bus-stop-number">609</span> Leystraße</p>
+            <p class="bus-stop"><span class="bus-stop-number">2185</span> Hopfengasse</p>
             <ul id="bus-stop-home">
             </ul>
         </div>
         <div class="bus-stop-div">
-            <p class="bus-stop"><span class="bus-stop-number">590</span> Friedrich-Engels-Platz</p>
+            <p class="bus-stop"><span class="bus-stop-number">S-Bahn</span> Wien Jedlersdorf</p>
             <ul id="bus-stop-other">
             </ul>
         </div>
@@ -455,7 +455,7 @@ function updateClock() {
 function updateBusWt() {
 
     $.ajax({
-        url: "https://transit.jdelfino.com/bus?id=609",
+        url: "https://transit.jdelfino.com/bus?id=VIE-al8ds&source=Citymapper",
         type: "GET",
         headers: {
             "Device-Id": getDeviceId(),
@@ -468,15 +468,14 @@ function updateBusWt() {
     });
 
     $.ajax({
-        url: "https://transit.jdelfino.com/bus?id=590",
+        url: "https://transit.jdelfino.com/bus?id=VIE-dz5p4&source=Citymapper",
         type: "GET",
         headers: {
             "Device-Id": getDeviceId(),
             "Device-Type": navigator.userAgent
         },
         success: function( data ) {
-            let data2 = { services: data.services.filter(s => s.no.startsWith("11B")) };
-            changeViewBusStopLarge('#bus-stop-other', data2);
+            changeViewBusStopLarge('#bus-stop-other', data);
             dataCache = data;
         }
     });
