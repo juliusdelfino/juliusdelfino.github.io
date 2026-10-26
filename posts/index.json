@@ -1,5 +1,13 @@
 [
   {
+    "slug": "20260830-garmin_to_strava",
+    "title": "Moving Eight Years of Garmin Activities to Strava",
+    "date": "2026-08-30",
+    "excerpt": "Moving eight years of Garmin activities to Strava.",
+    "tags": ["strava", "garmin"],
+    "coverImage": "/images/child-running-sun.jpg"
+  },
+  {
     "slug": "building-this-blog",
     "title": "Building This Blog",
     "date": "2025-01-15",
