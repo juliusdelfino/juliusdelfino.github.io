@@ -51,7 +51,6 @@
 }
 
 .tool-card-title {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);

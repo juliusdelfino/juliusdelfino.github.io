@@ -50,9 +50,9 @@ export async function renderBlogPost(app, slug) {
 
   app.innerHTML = `
     <article class="blog-post-page">
-      <div class="blog-hero" style="--cover-image: url(${post.coverImage})">
-        <img src="${post.coverImage}" alt="${post.title}" loading="lazy" class="blog-hero-img">
-        <div class="blog-hero-overlay glass">
+      <div class="blog-hero formal-border arch-corner-card" style="--cover-image: url(${post.coverImage})">
+        <img src="${post.coverImage}" alt="${post.title}" loading="lazy" class="blog-hero-img photo-ghibli-wash">
+        <div class="blog-hero-overlay glass formal-border-sm">
           <h1>${post.title}</h1>
           <div class="blog-meta">
             <time>${formatDate(post.date)}</time>
@@ -64,7 +64,7 @@ export async function renderBlogPost(app, slug) {
 
       <div class="blog-layout">
         ${headings.length > 0 ? `
-          <aside class="toc glass">
+          <aside class="toc glass formal-border">
             <h4>Table of Contents</h4>
             <nav>
               ${headings.map(h => `
@@ -74,14 +74,14 @@ export async function renderBlogPost(app, slug) {
           </aside>
         ` : ''}
 
-        <div class="blog-body content-card glass">
+        <div class="blog-body content-card glass formal-border arch-corner-card">
           ${htmlWithIds}
         </div>
       </div>
 
       <div class="blog-footer">
-        ${prev ? `<a href="#/blog/${prev.slug}" class="blog-nav-link glass prev-post"><span class="blog-nav-dir">\u2190 Previous</span><span class="blog-nav-title">${prev.title}</span><time>${formatDate(prev.date)}</time></a>` : '<div></div>'}
-        ${next ? `<a href="#/blog/${next.slug}" class="blog-nav-link glass next-post"><span class="blog-nav-dir">Next \u2192</span><span class="blog-nav-title">${next.title}</span><time>${formatDate(next.date)}</time></a>` : '<div></div>'}
+        ${prev ? `<a href="#/blog/${prev.slug}" class="blog-nav-link glass formal-border prev-post"><span class="blog-nav-dir">\u2190 Previous</span><span class="blog-nav-title">${prev.title}</span><time>${formatDate(prev.date)}</time></a>` : '<div></div>'}
+        ${next ? `<a href="#/blog/${next.slug}" class="blog-nav-link glass formal-border next-post"><span class="blog-nav-dir">Next \u2192</span><span class="blog-nav-title">${next.title}</span><time>${formatDate(next.date)}</time></a>` : '<div></div>'}
       </div>
     </article>`;
 

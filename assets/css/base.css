@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────
    1. Google Fonts
    ────────────────────────────────────────────── */
-/* Google Fonts: Cascadia Code (headings) + Inter (body) loaded via <link> in index.html */
+/* Google Fonts: Architects Daughter loaded via <link> in index.html */
 
 /* ──────────────────────────────────────────────
    2. Reset
@@ -68,33 +68,34 @@ p {
    3. CSS Variables — Light Theme (default)
    ────────────────────────────────────────────── */
 :root {
-  /* Glass */
-  --glass-bg: rgba(255, 255, 255, 0.62);
-  --glass-border: rgba(255, 255, 255, 0.22);
+  --paper-bg: #f7f3e8;
+  --paper-grid: #e3d9c3;
+  --ink: #3e3228;
+  --ink-soft: #6f5a49;
+  --frame: #4a3b32;
 
-  /* Text */
-  --text-primary: #1a1a2e;
-  --text-secondary: #444466;
+  --glass-bg: rgba(255, 253, 246, 0.84);
+  --glass-border: rgba(112, 86, 63, 0.32);
 
-  /* Overlay */
-  --bg-overlay: rgba(255, 255, 255, 0.45);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
 
-  /* Accent */
-  --accent: #2e7d52;
+  --bg-overlay: rgba(255, 248, 237, 0.72);
 
-  /* Nature palette */
-  --accent-forest: #4caf7d;
-  --accent-sky: #5ab4e5;
-  --accent-earth: #c8a46e;
-  --accent-mist: #a8bfc9;
+  --accent: #78956b;
+  --accent-forest: #637d57;
+  --accent-sky: #87a9bf;
+  --accent-earth: #b88a5a;
+  --accent-mist: #a08c78;
+  --bg-image: none;
 
   /* Derived / utility */
   --glass-blur: blur(18px) saturate(160%);
   --radius: 16px;
   --radius-sm: 10px;
   --radius-xs: 6px;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.24);
+  --shadow: 0 8px 24px rgba(64, 48, 34, 0.2);
+  --shadow-hover: 0 10px 30px rgba(64, 48, 34, 0.28);
   --transition-fast: 0.2s ease;
   --transition-med: 0.35s ease;
   --navbar-height: 64px;
@@ -106,25 +107,40 @@ p {
    3b. CSS Variables — Dark Theme
    ────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --glass-bg: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.22);
-  --text-primary: #f0f0f5;
-  --text-secondary: #b0b0c0;
-  --bg-overlay: rgba(0, 0, 0, 0.55);
-  --accent: #4caf7d;
+  --paper-bg: #17130f;
+  --paper-grid: #2a221a;
+  --ink: #f2e8d7;
+  --ink-soft: #c6b59e;
+  --frame: #8c7355;
+
+  --glass-bg: rgba(34, 28, 22, 0.84);
+  --glass-border: rgba(193, 166, 131, 0.26);
+
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --bg-overlay: rgba(19, 15, 11, 0.82);
+  --accent: #9cb68a;
+  --accent-forest: #b1c49e;
+  --accent-sky: #9ec2d8;
+  --accent-earth: #d0a171;
+  --accent-mist: #c0aa8f;
 }
 
 /* ──────────────────────────────────────────────
    4. Typography
    ────────────────────────────────────────────── */
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: var(--text-primary);
 }
 
+.navbar, .tag {
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
+}
+
 h1, h2, h3, h4 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -236,9 +252,11 @@ hr {
 /* Full-viewport nature photo background */
 body {
   position: relative;
-  background-color: #1a1a2e;
-  background-image: var(--bg-image, none);
-  background-size: cover;
+  background-color: var(--paper-bg);
+  background-image:
+    radial-gradient(var(--paper-grid) 1px, transparent 1px),
+    var(--bg-image, none);
+  background-size: 28px 28px, cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -285,6 +303,39 @@ body::before {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.formal-border {
+  border: 1.5px solid var(--frame) !important;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 rgba(74, 59, 50, 0.32), var(--shadow);
+}
+
+.formal-border-sm {
+  border: 1px solid var(--frame) !important;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 rgba(74, 59, 50, 0.26);
+}
+
+.arch-corner-card {
+  position: relative;
+}
+
+.arch-corner-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(140, 115, 85, 0.26);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.photo-ghibli-wash {
+  filter: saturate(1.36) contrast(1.06) sepia(0.16) hue-rotate(-4deg);
+}
+
+[data-theme="dark"] .photo-ghibli-wash {
+  filter: saturate(1.15) contrast(1.12) brightness(0.9) sepia(0.2);
 }
 
 /* Fallback for browsers without backdrop-filter */

@@ -126,11 +126,19 @@ function closeMobileMenu() {
   }
 }
 
+/** Sets the footer copyright year dynamically */
+function initFooterYear() {
+  const footerCopy = document.getElementById('footer-copy');
+  if (!footerCopy) return;
+  footerCopy.textContent = `© ${new Date().getFullYear()} Juju Journal`;
+}
+
 /* ── Initialization ── */
 
 /** Bootstraps the application */
 function init() {
   initTheme();
+  initFooterYear();
 
   document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
   document.getElementById('search-btn').addEventListener('click', openSearch);

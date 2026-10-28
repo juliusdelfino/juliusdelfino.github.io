@@ -50,7 +50,7 @@ export async function renderPortfolio(app, projectId) {
 
   app.innerHTML = `
     <section class="portfolio-page">
-      <aside class="portfolio-sidebar glass">
+      <aside class="portfolio-sidebar glass formal-border arch-corner-card">
         <h2 class="sidebar-title">Portfolio</h2>
         <nav class="sidebar-nav">
           ${projects.map(p => `
@@ -67,7 +67,7 @@ export async function renderPortfolio(app, projectId) {
       </aside>
 
       <div class="portfolio-main">
-        ${activeProject ? renderProjectDetail(activeProject) : renderProjectGrid(projects, introHtml)}
+        ${activeProject ? renderProjectDetail(activeProject, projects) : renderProjectGrid(projects, introHtml)}
         ${renderToolsSection()}
       </div>
     </section>`;
@@ -79,7 +79,7 @@ export async function renderPortfolio(app, projectId) {
 /** Renders the project grid view */
 function renderProjectGrid(projects, introHtml) {
   return `
-    <div class="portfolio-intro content-card glass">${introHtml}</div>
+    <div class="portfolio-intro content-card glass formal-border arch-corner-card">${introHtml}</div>
     <div class="project-grid" id="project-grid">
       ${projects.map(renderProjectCard).join('')}
     </div>`;
@@ -88,9 +88,9 @@ function renderProjectGrid(projects, introHtml) {
 /** Renders a single project card */
 function renderProjectCard(project) {
   return `
-    <a href="#/portfolio/${project.id}" class="project-card glass">
+    <a href="#/portfolio/${project.id}" class="project-card glass formal-border arch-corner-card">
       <div class="project-card-image">
-        <img src="${project.image}" alt="${project.title}" loading="lazy">
+        <img src="${project.image}" alt="${project.title}" loading="lazy" class="photo-ghibli-wash">
       </div>
       <div class="project-card-content">
         <div class="project-card-header">
@@ -106,16 +106,16 @@ function renderProjectCard(project) {
 }
 
 /** Renders the full project detail view */
-function renderProjectDetail(project) {
+function renderProjectDetail(project, allProjects) {
   // Only render action buttons if the corresponding URLs are provided
   const githubBtn = project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn">View on GitHub \u2192</a>` : '';
   const siteBtn = project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn">View Website \u2192</a>` : '';
 
   return `
-    <div class="project-detail glass">
+    <div class="project-detail glass formal-border arch-corner-card">
       <a href="#/portfolio" class="back-link">\u2190 Back to all projects</a>
       <div class="project-detail-image">
-        <img src="${project.image}" alt="${project.title}" loading="lazy">
+        <img src="${project.image}" alt="${project.title}" loading="lazy" class="photo-ghibli-wash">
       </div>
       <h1>${project.title}</h1>
       <div class="project-meta">
@@ -123,6 +123,7 @@ function renderProjectDetail(project) {
         <span class="project-year">${project.year}</span>
       </div>
       <p class="project-description">${project.description}</p>
+      <div class="tags">${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
       ${githubBtn}
       ${siteBtn}
     </div>`;
@@ -131,7 +132,7 @@ function renderProjectDetail(project) {
 /** Renders the Quick Tools section with preview cards */
 function renderToolsSection() {
   const cards = toolPreviews.map(t => `
-    <div class="tool-preview-card glass" data-tool-id="${t.id}">
+    <div class="tool-preview-card glass formal-border" data-tool-id="${t.id}">
       <div class="tool-preview-header">
         <span class="tool-preview-icon">${t.icon}</span>
         <h3>${t.name}</h3>

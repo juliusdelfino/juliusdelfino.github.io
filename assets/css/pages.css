@@ -6,34 +6,45 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: 52vh;
   text-align: center;
   padding: 2rem;
   position: relative;
 }
 
 .hero-title {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: 800;
-  color: #fff;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35), 0 0 60px rgba(0, 0, 0, 0.15);
+  color: var(--text-primary);
+  text-shadow: 0 2px 8px rgba(54, 39, 25, 0.18);
+  line-height: revert;
   margin-bottom: 0.3em;
   letter-spacing: -0.02em;
   /* Shimmer / gradient animation */
   background: linear-gradient(
     90deg,
-    #fff 0%,
-    #fff 40%,
+    var(--text-primary) 0%,
+    var(--text-primary) 40%,
     var(--accent-sky) 50%,
-    #fff 60%,
-    #fff 100%
+    var(--text-primary) 60%,
+    var(--text-primary) 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 6s ease-in-out infinite;
+}
+
+.hero-compact {
+  justify-content: flex-start;
+  gap: 1.4rem;
+  padding-top: 2.4rem;
+}
+
+.hero-featured {
+  width: min(100%, 1080px);
 }
 
 .hero-tagline {
@@ -74,10 +85,10 @@
 }
 
 .section-heading {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
   padding-left: 0.2em;
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -93,7 +104,7 @@
   background: var(--glass-bg);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--frame);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -126,7 +137,6 @@
 }
 
 .post-card-content h3 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -166,6 +176,7 @@
   grid-template-columns: 1.2fr 1fr;
   min-height: 320px;
   margin-bottom: 1rem;
+  border: 1.5px solid var(--frame);
 }
 
 .featured-card-image {
@@ -188,7 +199,7 @@
 }
 
 .featured-card-content h3 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -228,6 +239,10 @@
   letter-spacing: 0.1em;
   color: var(--accent);
   margin-bottom: 0.5em;
+}
+
+.post-feed-sentinel {
+  height: 20px;
 }
 
 /* ──────────────────────────────────────────────
@@ -275,7 +290,7 @@
 }
 
 .about-name {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -315,7 +330,7 @@
 }
 
 .stat-chip .stat-number {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent);
@@ -397,7 +412,7 @@
 }
 
 .sidebar-title {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -506,7 +521,7 @@
 }
 
 .project-card-content h3 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -622,7 +637,7 @@
   min-height: 320px;
   max-height: 500px;
   overflow: hidden;
-  border-radius: 0 0 var(--radius) var(--radius);
+  border-radius: var(--radius);
   margin-bottom: 2rem;
 }
 
@@ -638,16 +653,11 @@
   left: 0;
   right: 0;
   padding: 2.5rem 3rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.35) 60%,
-    transparent 100%
-  );
+  background: linear-gradient(to top, rgba(32, 23, 16, 0.74) 0%, rgba(32, 23, 16, 0.44) 56%, transparent 100%);
 }
 
 .blog-hero-overlay h1 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.6rem);
   font-weight: 800;
   color: #fff;
@@ -750,7 +760,7 @@
 }
 
 .toc h4 {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -829,7 +839,7 @@
 }
 
 .blog-nav-title {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);

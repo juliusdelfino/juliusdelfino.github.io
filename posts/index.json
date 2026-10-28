@@ -1,9 +1,9 @@
 [
   {
     "slug": "20260830-garmin_to_strava",
-    "title": "Moving Eight Years of Garmin Activities to Strava",
+    "title": "Moving my Garmin History to Strava",
     "date": "2026-08-30",
-    "excerpt": "Moving eight years of Garmin activities to Strava.",
+    "excerpt": "Migrating eight years of Garmin activities to Strava.",
     "tags": ["strava", "garmin"],
     "coverImage": "/images/child-running-sun.jpg"
   },
@@ -21,7 +21,7 @@
     "date": "2021-10-15",
     "excerpt": "I built a Garmin app to check for bus times in Singapore in real-time using LTA data.",
     "tags": ["tech", "garmin", "singapore"],
-    "coverImage": "/images/bus-sg-garmin-cover-photo7.png"
+    "coverImage": "/images/bus-sg-garmin-cover-photo.png"
   },
   {
     "slug": "20171201-lottominer",

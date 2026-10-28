@@ -11,50 +11,80 @@ export async function renderHome(app) {
   }
 
   const sorted = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
-  const recent = sorted.slice(0, 5);
-  const featured = recent[0];
-  const rest = recent.slice(1);
+  const featured = sorted[0];
+  const rest = sorted.slice(1);
+
+  const INITIAL_BATCH = 3;
+  const BATCH_SIZE = 4;
+  let renderedCount = 0;
 
   app.innerHTML = `
-    <section class="hero">
+    <section class="hero hero-compact">
       <h1 class="hero-title shimmer">Juju Journal</h1>
-      <p class="hero-tagline">Thoughts on technology, music, travel, and everything in between.</p>
-      <div class="scroll-arrow" aria-hidden="true">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-        </svg>
-      </div>
-    </section>
-
-    <section class="recent-posts">
-      <h2 class="section-heading">Recent Writing</h2>
-
-      <a href="#/blog/${featured.slug}" class="featured-card glass">
+      <a href="#/blog/${featured.slug}" class="featured-card glass formal-border arch-corner-card hero-featured">
         <div class="featured-card-image">
-          <img src="${featured.coverImage}" alt="${featured.title}" loading="lazy">
+          <img src="${featured.coverImage}" alt="${featured.title}" loading="lazy" class="photo-ghibli-wash">
         </div>
         <div class="featured-card-content">
+          <span class="featured-label">Most Recent</span>
           <h3>${featured.title}</h3>
           <time>${formatDate(featured.date)}</time>
           <p>${featured.excerpt}</p>
           <div class="tags">${featured.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         </div>
       </a>
+    </section>
 
-      <div class="post-grid">
-        ${rest.map(post => `
-          <a href="#/blog/${post.slug}" class="post-card glass">
-            <div class="post-card-image">
-              <img src="${post.coverImage}" alt="${post.title}" loading="lazy">
-            </div>
-            <div class="post-card-content">
-              <h3>${post.title}</h3>
-              <time>${formatDate(post.date)}</time>
-              <p>${post.excerpt}</p>
-              <div class="tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-            </div>
-          </a>
-        `).join('')}
-      </div>
+    <section class="recent-posts">
+      <h2 class="section-heading">More Journal Entries</h2>
+      <div id="post-grid" class="post-grid"></div>
+      <div id="post-feed-sentinel" class="post-feed-sentinel" aria-hidden="true"></div>
     </section>`;
+
+  const grid = app.querySelector('#post-grid');
+  const sentinel = app.querySelector('#post-feed-sentinel');
+
+  const renderPostCard = (post, index) => `
+    <a href="#/blog/${post.slug}" class="post-card glass formal-border arch-corner-card" style="--i:${index};">
+      <div class="post-card-image">
+        <img src="${post.coverImage}" alt="${post.title}" loading="lazy" class="photo-ghibli-wash">
+      </div>
+      <div class="post-card-content">
+        <h3>${post.title}</h3>
+        <time>${formatDate(post.date)}</time>
+        <p>${post.excerpt}</p>
+        <div class="tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </a>`;
+
+  const renderNextBatch = (count) => {
+    const next = rest.slice(renderedCount, renderedCount + count);
+    if (next.length === 0) {
+      if (observer) observer.disconnect();
+      sentinel.remove();
+      return;
+    }
+
+    grid.insertAdjacentHTML(
+      'beforeend',
+      next.map((post, idx) => renderPostCard(post, renderedCount + idx)).join('')
+    );
+    renderedCount += next.length;
+  };
+
+  let observer = null;
+  renderNextBatch(INITIAL_BATCH);
+
+  if ('IntersectionObserver' in window && sentinel) {
+    observer = new IntersectionObserver((entries) => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        renderNextBatch(BATCH_SIZE);
+      }
+    }, { rootMargin: '320px 0px' });
+
+    observer.observe(sentinel);
+  } else {
+    renderNextBatch(rest.length);
+    if (sentinel) sentinel.remove();
+  }
 }

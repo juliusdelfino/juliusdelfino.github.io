@@ -15,13 +15,13 @@
   background: var(--glass-bg);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--frame);
+  box-shadow: 0 2px 14px rgba(41, 31, 20, 0.2);
   transition: background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .nav-brand {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--accent);
@@ -49,7 +49,6 @@
 .nav-link {
   position: relative;
   padding: 0.45em 0.9em;
-  font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-secondary);
   border-radius: var(--radius-xs);
@@ -160,7 +159,7 @@
 
 .mobile-menu .nav-link {
   font-size: 1.6rem;
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-weight: 600;
   padding: 0.5em 1em;
 }
@@ -174,17 +173,17 @@
   font-size: 0.75rem;
   font-weight: 600;
   border-radius: 999px;
-  background: rgba(76, 175, 125, 0.15);
+  background: rgba(120, 149, 107, 0.16);
   color: var(--accent-forest);
-  border: 1px solid rgba(76, 175, 125, 0.25);
+  border: 1px solid rgba(99, 125, 87, 0.3);
   transition: all var(--transition-fast);
   cursor: default;
   white-space: nowrap;
 }
 
 .tag:hover {
-  background: rgba(76, 175, 125, 0.25);
-  border-color: rgba(76, 175, 125, 0.4);
+  background: rgba(120, 149, 107, 0.26);
+  border-color: rgba(99, 125, 87, 0.45);
 }
 
 .tag.sky {
@@ -322,12 +321,12 @@
   width: 100%;
   padding: 1.1em 3em 1.1em 1.6em;
   font-size: 1.2rem;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
+  color: var(--text-primary);
   background: var(--glass-bg);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
   outline: none;
@@ -357,7 +356,7 @@
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
+  color: color-mix(in srgb, var(--text-secondary) 75%, transparent);
 }
 
 .search-input:focus {
@@ -392,16 +391,16 @@
 }
 
 .search-result-title {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 0.2em;
 }
 
 .search-result-excerpt {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -414,7 +413,7 @@
 }
 
 .search-result-date {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
 }
 
 .search-result-tags {
@@ -440,8 +439,33 @@
 .search-empty-state {
   text-align: center;
   padding: 2rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   font-size: 0.95rem;
+}
+
+[data-theme="dark"] .search-input {
+  background: rgba(34, 28, 22, 0.9);
+  border-color: rgba(193, 166, 131, 0.36);
+  color: #f2e8d7;
+}
+
+[data-theme="dark"] .search-input::placeholder {
+  color: rgba(198, 181, 158, 0.78);
+}
+
+[data-theme="dark"] .search-result-card {
+  background: rgba(34, 28, 22, 0.88);
+  border-color: rgba(193, 166, 131, 0.28);
+}
+
+[data-theme="dark"] .search-result-title {
+  color: #f2e8d7;
+}
+
+[data-theme="dark"] .search-result-excerpt,
+[data-theme="dark"] .search-result-date,
+[data-theme="dark"] .search-empty-state {
+  color: #c6b59e;
 }
 
 /* ──────────────────────────────────────────────
@@ -469,7 +493,7 @@
 }
 
 .footer-brand {
-  font-family: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-family: 'Architects Daughter', 'Trebuchet MS', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--accent);

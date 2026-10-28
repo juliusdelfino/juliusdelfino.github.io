@@ -105,14 +105,11 @@
   /* Hero — thinner padding */
   .hero {
     padding: 1rem 0.75rem;
+    min-height: auto;
   }
 
   .hero-title {
     font-size: clamp(2rem, 10vw, 3.5rem);
-  }
-
-  .hero-tagline {
-    font-size: clamp(0.85rem, 3vw, 1rem);
   }
 
   /* Recent posts — thinner padding */
@@ -491,6 +488,6 @@
   .hero-title {
     animation: none;
     background: none;
-    -webkit-text-fill-color: #fff;
+    -webkit-text-fill-color: var(--text-primary);
   }
 }
