@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,24 +27,31 @@
         }
 
         .widget {
-            padding: 20px;
+            padding: clamp(4px, 1vw, 20px);
             border-radius: 15px;
             background-color: #1a1a1a;
             display: flex;
             flex-direction: column;
             justify-content: center;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
         }
 
         .clock {
             grid-area: clock;
-            font-size: 12rem;
+            font-size: clamp(8rem, 18vw, 20rem);
             text-align: center;
             letter-spacing: 0.1em;
             line-height: 1;
             color: #e0f7fa;
             background-color: #2b2b2b;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1px, 0.5vh, 8px);
         }
 
         .clock-time {
@@ -55,20 +62,20 @@
         }
 
         .clock-time span {
-            padding: 10px 20px;
+            padding: clamp(1px, 0.3vw, 6px) clamp(3px, 0.7vw, 12px);
             border-radius: 18px;
             background-color: #1c1c1c;
         }
 
         .seconds {
-            font-size: 1rem;
-            margin-left: 10px;
+            font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+            margin-left: 0;
             color: #00bcd4;
         }
 
         .date {
-            font-size: 4rem;
-            margin-top: 20px;
+            font-size: clamp(1.5rem, 3.8vw, 5rem);
+            margin-top: 0;
             color: #bbbbbb;
         }
 
@@ -77,98 +84,156 @@
             display: flex;
             flex-direction: row;
             width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(1px, 0.4vw, 10px);
+            overflow: hidden;
         }
 
         .weather-forecast {
             text-align: center;
             display: inline-block;
-            padding: 0 30px;
-            font-size: 2rem;
+            padding: 0 clamp(0px, 0.2vw, 6px);
+            font-size: clamp(1.15rem, 2.1vw, 2.3rem);
+            flex: 1;
+            min-width: 0;
         }
 
         .weather .hour {
-            font-size: 2rem;
+            font-size: clamp(1.1rem, 2vw, 2.2rem);
             color: #00bcd4;
         }
 
         .weather-forecast-now {
-            font-size: 4rem;
+            font-size: clamp(1.6rem, 4vw, 4.5rem);
+            flex: 1;
+            min-width: 0;
         }
 
         .weather-forecast-now .summary {
-            font-size: 2rem;
-            line-height: 0.5;
+            font-size: clamp(1rem, 1.7vw, 2.2rem);
+            line-height: 1.1;
         }
 
         .weather-forecast div {
-            font-size: 2rem;
+            font-size: clamp(1.15rem, 2vw, 2.2rem);
         }
 
         .bus-stop-div {
-
-            padding: 10px 20px;
-            margin-bottom: 10px;
+            padding: clamp(2px, 0.6vw, 10px) clamp(4px, 1vw, 20px);
+            margin-bottom: clamp(2px, 0.6vw, 10px);
             border-radius: 18px;
             background-color: #2b2b2b;
         }
 
         .bus-stop {
-            font-size: 1.2rem;
-            padding-bottom: 10px;
+            font-size: clamp(0.95rem, 1.3vw, 1.4rem);
+            padding-bottom: clamp(1px, 0.4vw, 10px);
             border-bottom: 2px solid black;
         }
 
         .buses {
             grid-area: buses;
-            font-size: 4rem;
+            font-size: 1rem;
             overflow-y: auto;
             text-align: left;
         }
 
         .bus {
-            font-size: 1.5rem;
+            font-size: clamp(1.05rem, 1.6vw, 1.7rem);
+            min-width: 0;
         }
 
         .bus-stop-number {
-            padding: 0px 10px;
+            padding: 0 10px;
             border-radius: 8px;
             background-color: #1c60a7;
             font-family: "Roboto Condensed", sans-serif;
+            font-size: clamp(0.95rem, 1.3vw, 1.4rem);
         }
 
         .bus-number {
-            font-size: 2.5rem;
-            padding: 0px 20px;
+            font-size: clamp(1.15rem, 2vw, 2.2rem);
+            padding: 0 clamp(4px, 0.7vw, 14px);
             border-radius: 8px;
             background-color: #1c60a7;
             font-family: "Roboto Condensed", sans-serif;
+            flex-shrink: 0;
+        }
+
+        .bus-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .bus-main {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .bus-headsign-wrap {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .bus-headsign {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 14px;
+            --marquee-shift: 0px;
+            --marquee-duration: 10s;
+        }
+
+        .bus-headsign.marquee {
+            animation: bus-marquee var(--marquee-duration, 10s) linear infinite;
         }
 
 
         .buses ul {
             list-style-type: none;
-            margin-bottom: 20px;
+            margin-bottom: clamp(6px, 1.1vh, 14px);
         }
 
         .buses ul li {
-             margin-bottom: 10px;
+             margin-bottom: clamp(4px, 0.8vh, 10px);
         }
 
         .bus-time {
             color: #00bcd4;
             font-family: "Roboto Condensed", sans-serif;
+            font-size: clamp(2rem, 3vw, 5rem);
+            padding-left: 2px;
+            line-height: 1.1;
         }
 
         .grid-container {
-        display: grid;
-        grid-template-areas:
-        "clock clock buses"
-        "weather weather buses";
-            grid-template-columns: 2fr 1fr;
+            display: grid;
+            grid-template-areas:
+            "clock clock buses"
+            "weather weather buses";
+            grid-template-columns: 32.5% 32.5% 35%;
             grid-template-rows: 2fr 1fr;
             gap: 15px;
             width: 95vw;
             height: 95vh;
+            max-height: 95vh;
+            overflow: hidden;
+        }
+
+        @keyframes bus-marquee {
+            0%, 18% {
+                transform: translateX(0);
+            }
+            82%, 100% {
+                transform: translateX(calc(-1 * var(--marquee-shift, 0px)));
+            }
         }
 
         .device-id-debug {
@@ -182,99 +247,95 @@
         /* Responsive scaling for Raspberry PI */
         @media (max-width: 720px) {
             .widget {
-                padding: 5px;
-                border-radius: 18px;
+                padding: 2px;
+                border-radius: 12px;
             }
 
             .clock {
-                font-size: 6rem;
+                gap: 1px;
             }
 
             .clock-time span {
-                padding: 3px 6px;
-                border-radius: 18px;
+                padding: 1px 3px;
+                border-radius: 10px;
             }
 
             .seconds {
                 font-size: 1rem;
-                margin-left: 2px;
             }
 
             .date {
                 font-size: 1.5rem;
-                margin-top: 5px;
+                line-height: 1;
             }
 
-            .weather-forecast {
-                padding: 0 3px;
-                font-size: 0.7rem;
+            .weather {
+                gap: 1px;
             }
 
+            .weather-forecast,
+            .weather-forecast div,
             .weather .hour {
-                font-size: 1rem;
+                font-size: 1.5rem;
+                padding: 0;
             }
 
             .weather-forecast-now {
-                font-size: 1.4rem;
-            }
-
-            .weather-forecast-now .summary {
-                font-size: 1rem;
-                line-height: 0.1;
-            }
-
-            .weather-forecast div {
-                font-size: 1rem;
-            }
-
-            .bus-stop-div {
-
-                padding: 3px 6px;
-                border-radius: 12px;
-            }
-
-            .bus-stop {
-                font-size: 0.7rem;
-                padding-bottom: 3px;
-                border-bottom: 1px solid black;
-            }
-
-            .buses {
-                font-size: 1rem;
-            }
-
-            .bus {
-                font-size: 1rem;
-            }
-
-            .bus-time {
                 font-size: 2rem;
             }
 
-            .bus-stop-number {
-                padding: 0px 5px;
-                border-radius: 5px;
+            .weather-forecast-now .summary {
+                font-size: 1.05rem;
+                line-height: 1;
+            }
+
+            .bus-stop-div {
+                padding: 2px 3px;
+                margin-bottom: 2px;
+            }
+
+            .bus-stop {
+                font-size: 1rem;
+                padding-bottom: 1px;
+            }
+
+            .bus-main {
+                gap: 3px;
             }
 
             .bus-number {
-                font-size: 1rem;
-                padding: 0px 5px;
+                font-size: 1.5rem;
+                padding: 0 3px;
                 border-radius: 5px;
             }
 
+            .bus {
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+            .bus-time {
+                font-size: 2rem;
+                line-height: 1;
+            }
+
             .buses ul {
-                list-style-type: none;
-                margin-bottom: 5px;
+                margin-bottom: 2px;
             }
 
             .buses ul li {
-                 margin-bottom: 5px;
+                margin-bottom: 2px;
             }
 
             .grid-container {
                 gap: 5px;
                 width: 95vw;
                 height: 95vh;
+            }
+
+            .weather-forecast-now img,
+            .weather-forecast img {
+                max-width: 30px;
+                height: auto;
             }
 
             .device-id-debug {
@@ -284,6 +345,32 @@
                 font-size: 8px;
                 line-height: 1.15;
                 max-width: 98vw;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-container {
+                gap: 3px;
+            }
+
+            .widget {
+                padding: 1px;
+            }
+
+            .date {
+                font-size: 1.35rem;
+            }
+
+            .weather-forecast,
+            .weather-forecast div,
+            .weather .hour,
+            .bus,
+            .bus-time {
+                font-size: 1.05rem;
+            }
+
+            .weather-forecast-now {
+                font-size: 1.55rem;
             }
         }
 
@@ -304,16 +391,16 @@
     <div class="widget weather">
         <div class="weather-forecast-now">
             <div class="hour">Now</div>
-            <div><span class="temp"></span>°C <img/></div>
+            <div><span class="temp"></span>°C <img alt="Current weather icon"/></div>
             <div class="summary"></div>
         </div>
         <div class="weather-forecast hr1">
             <div class="hour">+1hr</div>
-            <div><span class="temp"></span>°C <img/></div>
+            <div><span class="temp"></span>°C <img alt="+1 hour weather icon"/></div>
         </div>
         <div class="weather-forecast hr2">
             <div class="hour">+2hr</div>
-            <div><span class="temp"></span>°C <img/></div>
+            <div><span class="temp"></span>°C <img alt="+2 hour weather icon"/></div>
         </div>
     </div>
 
@@ -568,34 +655,92 @@ function updateWeather() {
         });
 }
 
-function changeViewBusStopLarge(bus_wt_id, data) {
-    $(bus_wt_id).html("");
-    for (var idx in data.services) {
-      var busInfo = data.services[idx];
-      var bus_wt_id_large = (idx < 4) ? bus_wt_id : bus_wt_id + "-2";
-      let busNo = busInfo.no;
-      let busHeadsign = busInfo.headsign;
-      let busTimeNext = busInfo.next != null ? toReadableWaitingTime(busInfo.next.duration_ms) : "";
-      let busTimeNext2 = busInfo.next2 != null ? toReadableWaitingTime(busInfo.next2.duration_ms) : "";
-      let busTimes = [busTimeNext, busTimeNext2].filter(s => s).join(", ");
-      if (busTimes)
-        busTimes += "min";
+function escapeHtml(value) {
+    return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
-       $(bus_wt_id_large).append('<li><span class="bus"><span class="bus-number">' + busNo + '</span> ' + busHeadsign + '</span><br/> <span class="bus-time">' + busTimes + '</span></li>');
-    }
+function refreshBusMarquee(scopeSelector) {
+    const root = document.querySelector(scopeSelector);
+    if (!root) return;
+
+    root.querySelectorAll('.bus-headsign').forEach(function(el) {
+        const wrap = el.parentElement;
+        if (!wrap) return;
+
+        el.classList.remove('marquee');
+        el.style.removeProperty('--marquee-shift');
+        el.style.removeProperty('--marquee-duration');
+
+        const overflow = Math.ceil(el.scrollWidth - wrap.clientWidth);
+        if (overflow <= 6) return;
+
+        const duration = Math.min(16, Math.max(7, overflow / 18));
+        el.style.setProperty('--marquee-shift', overflow + 'px');
+        el.style.setProperty('--marquee-duration', duration + 's');
+        el.classList.add('marquee');
+    });
+}
+
+function changeViewBusStopLarge(bus_wt_id, data) {
+    const $list = $(bus_wt_id);
+    $list.html('');
+
+    const services = (data && Array.isArray(data.services)) ? data.services : [];
+    services.slice(0, 4).forEach(function(busInfo) {
+        let busNo = escapeHtml(busInfo.no || '');
+        let busHeadsign = escapeHtml(busInfo.headsign || '');
+        let busTimeNext = busInfo.next != null ? toReadableWaitingTime(busInfo.next.duration_ms) : '';
+        let busTimeNext2 = busInfo.next2 != null ? toReadableWaitingTime(busInfo.next2.duration_ms) : '';
+
+        let busTimes = [busTimeNext, busTimeNext2].filter(function(s) { return s; }).join(', ');
+        if (busTimes && displayMode === DISP_MINUTES) {
+            busTimes += 'min';
+        }
+
+        $list.append(
+            '<li class="bus-row">' +
+                '<div class="bus-main">' +
+                    '<span class="bus-number">' + removeTransportKeywords(busNo) + '</span>' +
+                    '<span class="bus bus-headsign-wrap"><span class="bus-headsign">' + busHeadsign + '</span></span>' +
+                '</div>' +
+                '<span class="bus-time">' + busTimes + '</span>' +
+            '</li>'
+        );
+    });
+
+    refreshBusMarquee(bus_wt_id);
+}
+
+function removeTransportKeywords(text) {
+    if (text == null) return text; // handles null and undefined
+
+    return text
+        .replace(/\b(Straßenbahn|Regionalbus)\b/gi, "")
+        .replace(/\s{2,}/g, " ")
+        .trim();
 }
 
 function toReadableWaitingTime(msTime) {
     if (msTime == null) return null;
-    if (displayMode == DISP_MILLIS) return "<span style='font-size: 3vw'>" + msTime + "</span>";
-    if (displayMode == DISP_TIME) {
+    if (displayMode === DISP_MILLIS) return "<span style='font-size: 3vw'>" + msTime + "</span>";
+    if (displayMode === DISP_TIME) {
         var now = new Date();
         var nowMillis = now.getTime() + msTime - (now.getTimezoneOffset() * 60000);
         return "<span style='font-size: 4vw'>" + new Date(nowMillis).toISOString().slice(-13, -8) + "</span>";
     }
-    time = Math.floor(msTime / 60000)
+    var time = Math.floor(msTime / 60000);
     return time > 0 ? time : "Arr";
 }
+
+window.addEventListener('resize', function() {
+    refreshBusMarquee('#bus-stop-home');
+    refreshBusMarquee('#bus-stop-other');
+});
 
 setInterval(updateClock, 1000);
 updateClock();
